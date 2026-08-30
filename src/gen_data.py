@@ -369,10 +369,20 @@ def inject_4d_corner(df):
     positions. Perimeter die are hit because process uniformity is
     always worst at the wafer edge, leaving them the least margin.
 
-    Two lots (L46, L47) ran before monitor-wafer metrology caught the
-    drift and the line was serviced. Consecutive lots are the
-    signature of a time-window excursion rather than a tool-to-tool
-    or materials problem.
+    The affected window is the two MOST RECENT lots (L47, L48). This
+    matters diagnostically: the excursion is still open. Monitor-wafer
+    metrology measures film thickness, which the ozone deficit does
+    not change, so nothing upstream has flagged the tool and it is
+    still running. Any material processed after L48 carries the same
+    defect.
+
+    Contiguity plus recency is the signature that distinguishes an
+    ACTIVE tool excursion from a closed one. Had the affected lots
+    been L46 and L47 with a clean L48, the correct inference would be
+    that the condition self-resolved. Because the trend runs to the
+    end of the sampled window, the correct engineering response is
+    containment: hold untested WIP from the same tool and date code,
+    and inspect the ozone delivery path.
 
     ---------------------------------------------------------------
     WHY ONLY AT 85 C AND 0.75 V
@@ -425,14 +435,14 @@ def inject_4d_corner(df):
     marginal view is diluted 3-5x and gives a hint, never a
     conclusion:
 
-        by LOT    L46 0.61%  L47 0.69%   vs 0.12-0.16% elsewhere
+        by LOT    L47 / L48 elevated          vs baseline elsewhere
         by TEMP   85C 0.75%              vs 0.11% / 0.17%
         by VDD    0.75V 0.73%            vs 0.14% / 0.16%
         by REGION sector 1.37%           vs 0.14%
         by TEST   four at 0.53-0.72%     vs 0.13-0.18% baseline
 
     All four crossed: 72% failure on affected tests. Overall yield
-    91.7% vs 95.8% baseline; 38.0% inside the sector for L46-L47.
+    ~91.7% vs 95.8% baseline; sector yield in L47-L48 far below.
 
     An agent limited to single-axis grouping can observe all four
     hints and correctly guess their conjunction, but cannot confirm
@@ -450,7 +460,7 @@ def inject_4d_corner(df):
 
     cell = (
         (r_norm > 0.55) & (angle >= 100) & (angle <= 195)   # upper-left edge
-        & df["LOT_ID"].isin(["L46", "L47"])                 # affected window
+        & df["LOT_ID"].isin(["L47", "L48"])                 # affected window
         & (df["TEMP_C"] == 85)                              # hot corner
         & (df["VDD"] == 0.75)                               # low rail
     )
