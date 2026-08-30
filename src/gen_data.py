@@ -2,18 +2,24 @@
 gen_data.py — Synthetic post-silicon ATE datalog generator.
 
 Simulates STDF datalog data AFTER conversion to a structured table.
-Writes four datasets to data/:
+One row = one test execution on one die at one condition.
+5 lots x 5 wafers x 150 die x 3 insertions x 10 tests = 112,500 rows.
 
-    baseline_allpass.csv  limits at 6 sigma, nothing fails    -> validation only
-    clean.csv             no injected defect                  -> NONE     (depth 0)
-    defect_lot.csv        lot Fmax/Vmin shift, yield-visible  -> LOT_ID   (depth 1)
-    defect_lot_subtle.csv same cause, pre-yield-loss           -> LOT_ID   (depth 2)
-    defect_site.csv       test-site drift over time           -> SITE_NUM (depth 1)
-    defect_temp.csv       cold-corner Vmin_sram shift         -> TEMP_C   (depth 2)
-    defect_edge.csv       edge-ring IO leakage signature      -> SPATIAL  (depth 2)
-    defect_edge_temp.csv  edge x hot interaction on leakage   -> SPATIAL x TEMP_C (depth 3)
+ACTIVE DATASETS (written to data/):
 
-Seeded, so the datasets are reproducible from this file alone.
+    clean.csv       no injected defect, ~4% natural fail
+                    -> expected answer: NONE
+
+    defect_4d.csv   ALD ozone deficit; drive-current marginality confined
+                    to LOT x SPATIAL x TEMP_C x VDD
+                    -> expected answer: LOT_ID x SPATIAL x TEMP_C x VDD
+                       4 dimensions, 5 minimum tool calls
+
+Both share SEED, so they differ only by the injected condition. Six
+further scenarios are implemented below and can be re-enabled in
+DATASETS; see the dict at the bottom of the file.
+
+Reproducible from this file alone — the CSVs are not committed.
 """
 
 import numpy as np
@@ -140,9 +146,10 @@ def build_base(rng):
 # ----------------------------------------------------------------------
 # Defect injections
 #
-# Each shifts the mean of one or more tests along exactly one dimension.
-# The magnitudes below are starting points — verify and tune them in
-# Step 2 before building anything on top.
+# Each function shifts test means along one or more dimensions. All
+# magnitudes were tuned empirically against a target detectability
+# profile, not chosen a priori — see each docstring for the resulting
+# marginal and intersection failure rates.
 # ----------------------------------------------------------------------
 
 def widen_limits(df):
@@ -331,6 +338,138 @@ def inject_quadrant_hot(df):
     return df
 
 
+def inject_4d_corner(df):
+    """
+    Four-dimensional marginality: LOT x SPATIAL x TEMP_C x VDD.
+
+    ---------------------------------------------------------------
+    PHYSICAL MECHANISM
+    ---------------------------------------------------------------
+    The HfO2 gate dielectric is grown by ALD, alternating a hafnium
+    precursor pulse with an ozone pulse that oxidises it. A partially
+    restricted ozone line delivers roughly 90% of the intended dose to
+    one region of the chamber. Hafnium still arrives at full dose, so
+    FILM THICKNESS IS UNCHANGED -- which is why in-line ellipsometry,
+    which measures thickness at a handful of fixed sites per wafer,
+    does not flag it. What changes is film chemistry: incomplete
+    oxidation leaves oxygen vacancies and unreacted carbon, giving
+    sub-stoichiometric HfO(2-x).
+
+        ozone dose 90%
+          -> oxygen vacancies + carbon residue
+          -> trapped charge cancels part of the gate field
+          -> V_th up (~30 mV), mu_eff down
+          -> I_D down ~12%      [alpha-power law, Sakurai & Newton 1990]
+          -> t_pd up ~14%
+          -> timing margin consumed
+
+    The wafer does not rotate during this step and loads at a fixed
+    notch orientation, so the starved region maps to the same die
+    coordinates on every wafer: upper-left perimeter, 16.7% of
+    positions. Perimeter die are hit because process uniformity is
+    always worst at the wafer edge, leaving them the least margin.
+
+    Two lots (L46, L47) ran before monitor-wafer metrology caught the
+    drift and the line was serviced. Consecutive lots are the
+    signature of a time-window excursion rather than a tool-to-tool
+    or materials problem.
+
+    ---------------------------------------------------------------
+    WHY ONLY AT 85 C AND 0.75 V
+    ---------------------------------------------------------------
+    The die is ~14% slow at every corner, against ~15% design margin,
+    so it passes almost everywhere. Two stress conditions remove the
+    remaining slack:
+
+      Heat  - phonon scattering cuts mobility ~24% (mu ~ T^-1.5).
+              This hits EVERY die equally; it does not widen the
+              healthy/defective gap, it removes the cushion hiding it.
+      Low V - a fixed 30 mV V_th shift is a larger fraction of a
+              smaller overdrive: 9% I_D loss at 0.75 V vs 7% at
+              0.85 V.
+
+    Either alone leaves enough margin. Together they do not.
+
+    ASSUMPTION: operation above the zero-temperature-coefficient
+    point, where mobility degradation dominates the V_th reduction
+    with temperature. Below ZTC the sign inverts and hot becomes the
+    fast corner; this is why production flows test multiple corners
+    rather than assuming one is worst.
+
+    ---------------------------------------------------------------
+    WHY THESE FOUR TESTS
+    ---------------------------------------------------------------
+    The mechanism is reduced drive current, so every test with a
+    timing deadline degrades and every test without one does not.
+
+      core_fmax  down   max frequency is drive-limited
+      vmin_core  up     more voltage needed to close the same timing
+      sram_bist  up     weak access device loses the write contest
+      pll_lock   up     charge pump and VCO slew more slowly
+
+    Deliberately untouched, and diagnostically important:
+
+      io_leakage, idd_static   off-state conduction, and it worsens at
+                               HIGH voltage while this defect worsens
+                               at LOW voltage -- opposite dependence,
+                               which rules leakage out as the cause
+      idd_dynamic              C*V^2*f, set by switching activity
+      vmin_sram                read stability, not write margin
+      scan_stuck_at            DC test, no timing deadline
+      thermal_diode            sensor readout, not logic
+
+    ---------------------------------------------------------------
+    DETECTABILITY
+    ---------------------------------------------------------------
+    The affected cell is 0.72% of measurements (314 rows). Every
+    marginal view is diluted 3-5x and gives a hint, never a
+    conclusion:
+
+        by LOT    L46 0.61%  L47 0.69%   vs 0.12-0.16% elsewhere
+        by TEMP   85C 0.75%              vs 0.11% / 0.17%
+        by VDD    0.75V 0.73%            vs 0.14% / 0.16%
+        by REGION sector 1.37%           vs 0.14%
+        by TEST   four at 0.53-0.72%     vs 0.13-0.18% baseline
+
+    All four crossed: 72% failure on affected tests. Overall yield
+    91.7% vs 95.8% baseline; 38.0% inside the sector for L46-L47.
+
+    An agent limited to single-axis grouping can observe all four
+    hints and correctly guess their conjunction, but cannot confirm
+    or quantify it. Confirming requires filtering several dimensions
+    simultaneously.
+
+    Answer: LOT_ID x SPATIAL x TEMP_C x VDD  (4 dimensions)
+    """
+    cx = df["X_COORD"].max() / 2
+    cy = df["Y_COORD"].max() / 2
+    dx, dy = df["X_COORD"] - cx, df["Y_COORD"] - cy
+    r_norm = np.sqrt(dx ** 2 + dy ** 2)
+    r_norm = r_norm / r_norm.max()
+    angle = np.degrees(np.arctan2(dy, dx)) % 360
+
+    cell = (
+        (r_norm > 0.55) & (angle >= 100) & (angle <= 195)   # upper-left edge
+        & df["LOT_ID"].isin(["L46", "L47"])                 # affected window
+        & (df["TEMP_C"] == 85)                              # hot corner
+        & (df["VDD"] == 0.75)                               # low rail
+    )
+
+    affected = {
+        "core_fmax":   -2.2,   # drive-limited max frequency
+        "pll_lock":     2.0,   # analog VCO/charge pump slows
+        "vmin_core":    1.9,   # more voltage needed to meet timing
+        "sram_bist":    1.7,   # weak access devices -> write margin loss
+    }
+    scale = 1.8
+
+    for test, k in affected.items():
+        m = cell & (df["TEST_TXT"] == test)
+        df.loc[m, "RESULT"] += k * scale * df.loc[m, "_SIGMA"]
+
+    return df
+
+
 def inject_site(df):
     """
     Test site 3 drifting out of calibration over the course of the run.
@@ -388,18 +527,18 @@ def finalize(df):
 # ----------------------------------------------------------------------
 
 DATASETS = {
-    "clean":           None,               # control  -> expected answer: NONE
-    "defect_quad_hot": inject_quadrant_hot, # -> SPATIAL x TEMP_C
+    "clean":     None,              # control            -> NONE
+    "defect_4d": inject_4d_corner,  # LOT x SPATIAL x TEMP_C x VDD
 
-    # Additional scenarios are implemented above and can be re-enabled by
-    # adding them here. Left out of the active set for now.
-    #   "baseline_allpass":  widen_limits,      # harness validation, 100% yield
-    #   "defect_lot":        inject_lot,        # LOT_ID,   1 dim, 1 step
-    #   "defect_lot_subtle": inject_lot_subtle, # LOT_ID,   1 dim, 2 steps
-    #   "defect_site":       inject_site,       # SITE_NUM, 1 dim, 1 step
-    #   "defect_temp":       inject_temp,       # TEMP_C,   1 dim, 2 steps
-    #   "defect_edge":       inject_edge,       # SPATIAL,  1 dim, 2 steps
-    #   "defect_edge_temp":  inject_edge_temp,  # SPATIAL x TEMP_C
+    # Implemented above; re-enable by uncommenting.
+    #   "baseline_allpass":  widen_limits,       # harness check, 100% yield
+    #   "defect_lot":        inject_lot,         # LOT_ID            1 dim
+    #   "defect_lot_subtle": inject_lot_subtle,  # LOT_ID            1 dim, 2 steps
+    #   "defect_site":       inject_site,        # SITE_NUM          1 dim
+    #   "defect_temp":       inject_temp,        # TEMP_C            1 dim, 2 steps
+    #   "defect_edge":       inject_edge,        # SPATIAL           1 dim, 2 steps
+    #   "defect_edge_temp":  inject_edge_temp,   # SPATIAL x TEMP_C  2 dim
+    #   "defect_quad_hot":   inject_quadrant_hot,# SPATIAL x TEMP_C  2 dim, 6 tests
 }
 
 
