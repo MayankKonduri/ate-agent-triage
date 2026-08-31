@@ -431,18 +431,18 @@ def inject_4d_corner(df):
     ---------------------------------------------------------------
     DETECTABILITY
     ---------------------------------------------------------------
-    The affected cell is 0.72% of measurements (314 rows). Every
-    marginal view is diluted 3-5x and gives a hint, never a
-    conclusion:
+    The affected cell is 339 rows, 0.30% of measurements, spread
+    across 199 of 3,750 die (5.3% of parts). Every marginal view is
+    diluted and gives a hint, never a conclusion:
 
-        by LOT    L47 / L48 elevated          vs baseline elsewhere
-        by TEMP   85C 0.75%              vs 0.11% / 0.17%
-        by VDD    0.75V 0.73%            vs 0.14% / 0.16%
-        by REGION sector 1.37%           vs 0.14%
-        by TEST   four at 0.53-0.72%     vs 0.13-0.18% baseline
+        by LOT    L47 0.69%  L48 0.66%   vs 0.14-0.16% elsewhere
+        by TEMP   85C 0.81%              vs 0.11% / 0.17%
+        by VDD    0.75V 0.78%            vs 0.14% / 0.16%
+        by REGION sector 1.47%           vs 0.14%
+        by TEST   four at 0.62-0.76%     vs 0.10-0.18% baseline
 
-    All four crossed: 72% failure on affected tests. Overall yield
-    ~91.7% vs 95.8% baseline; sector yield in L47-L48 far below.
+    All four crossed: 72.0% failure on the affected tests, against
+    0.14% elsewhere. Overall part yield 91.6% vs 95.8% baseline.
 
     An agent limited to single-axis grouping can observe all four
     hints and correctly guess their conjunction, but cannot confirm
@@ -509,7 +509,15 @@ def inject_temp(df):
 # ----------------------------------------------------------------------
 
 def finalize(df):
-    """Apply limits, assign bins, drop internal columns."""
+    """
+    Apply limits, assign bins, drop internal columns.
+
+    Pass/fail and binning are recorded in the datalog, matching STDF:
+    the Parametric Test Record carries TEST_FLG, and the Part Results
+    Record carries PART_FLG together with HARD_BIN and SOFT_BIN. The
+    limits ride along on every row as well, so downstream analysis can
+    re-derive pass/fail against alternate or guardbanded limits.
+    """
     df = df.copy()
 
     in_limits = (df["RESULT"] >= df["LO_LIMIT"]) & (df["RESULT"] <= df["HI_LIMIT"])
