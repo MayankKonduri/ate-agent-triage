@@ -8,6 +8,24 @@ The University of Texas at Austin
 
 ---
 
+## Research Question
+
+The central question investigated by this repository is:
+
+> **Does the schema of the analysis tools place a measurable bound on an LLM agent's ability to discover the root-cause structure of post-silicon ATE excursions?**
+
+The experimental design separates two mechanisms:
+
+**Coverage:**
+Can the agent observe the relevant dimensions at all?
+
+**Composition:**
+Can the agent combine observations into the specific intersection where the failure is concentrated?
+
+The resulting 40-run matrix measures how these properties affect **correct discovery, false discovery, missed dimensions, interaction identification, evidence quality, and investigation efficiency**.
+
+---
+
 ## Overview
 
 A fabless semiconductor company receives test data from overseas assembly and test partners rather than physical silicon. When a production lot's yield falls below its statistical limit, an engineer must diagnose the cause from the datalog alone by choosing which dimension to group along next:
@@ -335,24 +353,6 @@ The **95.8% baseline** represents parametric yield only. Gross functional failur
 The agent has access only to the datalog and the excursion-gate output. It has no process, equipment, maintenance, or manufacturing-history records.
 
 Therefore, the agent can **localize a failure within the test data but cannot establish its physical process cause**. Every final report states this limitation.
-
----
-
-## Research Question
-
-The central question investigated by this repository is:
-
-> **Does the schema of the analysis tools place a measurable bound on an LLM agent's ability to discover the root-cause structure of post-silicon ATE excursions?**
-
-The experimental design separates two mechanisms:
-
-**Coverage:**
-Can the agent observe the relevant dimensions at all?
-
-**Composition:**
-Can the agent combine observations into the specific intersection where the failure is concentrated?
-
-The resulting 40-run matrix measures how these properties affect **correct discovery, false discovery, missed dimensions, interaction identification, evidence quality, and investigation efficiency**.
 
 ---
 
