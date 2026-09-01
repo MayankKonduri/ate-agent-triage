@@ -14,16 +14,6 @@ The central question investigated by this repository is:
 
 > **Does the schema of the analysis tools place a measurable bound on an LLM agent's ability to discover the root-cause structure of post-silicon ATE excursions?**
 
-The experimental design separates two mechanisms:
-
-**Coverage:**
-Can the agent observe the relevant dimensions at all?
-
-**Composition:**
-Can the agent combine observations into the specific intersection where the failure is concentrated?
-
-The resulting 40-run matrix measures how these properties affect **correct discovery, false discovery, missed dimensions, interaction identification, evidence quality, and investigation efficiency**.
-
 ---
 
 ## Overview
