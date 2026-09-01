@@ -72,7 +72,33 @@ Use SPATIAL for any effect tied to die position on the wafer. List only \
 dimensions your retrieved numbers support. Use NONE if there is no \
 systematic pattern.
 
-Below that line, give the report under these four headings, in order:
+Immediately below it, give a second line naming the specific values
+responsible, in this format:
+
+ROOT_CAUSE_VALUES: LOT_ID=L44,L45; TEMP_C=85; SPATIAL=edge NW
+
+Use a semicolon between dimensions and a comma between values of the
+same dimension. Include only dimensions you listed above, with the
+values your retrieved numbers support. Write NONE if you declared no
+dimensions. The example format above is illustrative only.
+
+Then a third line stating how the dimensions relate to one another:
+
+ROOT_CAUSE_STRUCTURE: <interaction | independent | single | none>
+
+Use interaction if failures occur only where the dimensions co-occur, \
+independent if each contributes separately, single if only one dimension \
+is responsible, and none if you declared no dimensions.
+
+Then a fourth line stating how you established that:
+
+ROOT_CAUSE_EVIDENCE: <measured | inferred>
+
+Use measured only if you obtained a failure rate for the specific \
+combination itself. Use inferred if you observed the dimensions in \
+separate results and reasoned about their relationship.
+
+Below those four lines, give the report under these four headings, in order:
 
 FINDINGS
   Numbered. One line each. Every line must contain the numbers you
@@ -127,6 +153,52 @@ def _parse_answer(text):
         if t in DIMENSIONS and t not in found:
             found.append(t)
     return found
+
+
+def _parse_values(text):
+    """
+    Pull the declared values off the ROOT_CAUSE_VALUES line.
+
+    Returns {dimension: [values]}, {} for NONE, or None if the line is
+    absent. Only dimension names in DIMENSIONS are kept; anything else
+    the model writes is discarded.
+    """
+    marks = list(re.finditer(r"ROOT_CAUSE_VALUES:\s*", text or "",
+                             re.IGNORECASE))
+    if not marks:
+        return None
+
+    tail = text[marks[-1].end():]
+    tail = re.split(r"\n\s*\n", tail)[0][:400].strip()
+    if re.match(r"NONE\b", tail, re.IGNORECASE):
+        return {}
+
+    out = {}
+    for part in tail.split(";"):
+        if "=" not in part:
+            continue
+        dim, _, vals = part.partition("=")
+        dim = dim.strip().upper()
+        if dim not in DIMENSIONS:
+            continue
+        out[dim] = [v.strip() for v in vals.split(",") if v.strip()]
+    return out
+
+
+STRUCTURES = ["interaction", "independent", "single", "none"]
+EVIDENCE = ["measured", "inferred"]
+
+
+def _parse_word(text, marker, allowed):
+    """Pull a single controlled word off a marker line."""
+    m = list(re.finditer(marker + r":\s*", text or "", re.IGNORECASE))
+    if not m:
+        return None
+    tail = text[m[-1].end():].split("\n")[0].strip().lower()
+    for w in allowed:
+        if re.match(rf"\**{w}\b", tail):
+            return w
+    return None
 
 
 def _serialise(messages):
@@ -255,6 +327,9 @@ def run(csv, config, gate_report=None):
         "config": config,
         "csv": csv,
         "dimensions": _parse_answer(final),
+        "values": _parse_values(final),
+        "structure": _parse_word(final, "ROOT_CAUSE_STRUCTURE", STRUCTURES),
+        "evidence": _parse_word(final, "ROOT_CAUSE_EVIDENCE", EVIDENCE),
         "turns": turns,
         "tool_calls": len(calls),
         "tool_errors": sum(c["error"] for c in calls),
@@ -295,6 +370,9 @@ if __name__ == "__main__":
         "metrics": {
             "declared": "|".join(r["dimensions"])
                         if r["dimensions"] is not None else "NO_ANSWER_LINE",
+            "values": r["values"],
+            "structure": r["structure"],
+            "evidence": r["evidence"],
             "turns": r["turns"],
             "tool_calls": r["tool_calls"],
             "filtered_calls": r["filtered_calls"],
@@ -320,6 +398,8 @@ if __name__ == "__main__":
     print(f"distinct      {r['distinct_tools']} tools")
     print(f"tokens        {r['input_tokens']:,} in / {r['output_tokens']:,} out")
     print(f"dimensions    {r['dimensions']}")
+    print(f"values        {r['values']}")
+    print(f"structure     {r['structure']}   evidence  {r['evidence']}")
     print()
     print(f"report        {pdf_path}")
     print(f"run record    {rec_path}")

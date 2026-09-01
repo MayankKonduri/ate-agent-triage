@@ -179,9 +179,14 @@ def get_yield_summary(csv, group_by, filters=None):
 
 def get_fail_rate_by_condition(csv, test_txt=None, filters=None):
     """
-    Failure rate split by temperature and supply voltage.
+    Failure rate split by temperature and by supply voltage.
 
-    Returns the two marginals and the full TEMP_C x VDD grid.
+    Returns the two marginals SEPARATELY and does not return the
+    TEMP_C x VDD grid. Crossing the two is composition, and composition
+    is the capability the ablation manipulates: returning a crossed grid
+    here would hand every configuration a two-way intersection whether
+    or not it was permitted to construct one. A configuration with
+    filters can obtain any cell by restricting rows first.
     """
     df, f = _apply(_load(csv), filters)
     if test_txt:
@@ -193,15 +198,10 @@ def get_fail_rate_by_condition(csv, test_txt=None, filters=None):
                for k, s in df.groupby("TEMP_C")]
     by_vdd = [{"VDD": float(k), "fail_rate_pct": _fail_rate(s)}
               for k, s in df.groupby("VDD")]
-    grid = [{"TEMP_C": int(k[0]), "VDD": float(k[1]),
-             "runs": int(len(s)), "fail_rate_pct": _fail_rate(s)}
-            for k, s in df.groupby(["TEMP_C", "VDD"])]
-
     return _wrap(df, f, {
         "test": test_txt or "all",
         "by_temperature": by_temp,
         "by_voltage": by_vdd,
-        "temp_x_vdd": grid,
     })
 
 
@@ -213,9 +213,11 @@ def get_yield_by_region(csv, test_txt=None, filters=None):
     """
     Failure rate by die position on the wafer.
 
-    Returns radial bands, angular octants, and the radius x octant grid.
-    A defect confined to one sector is diluted in either marginal alone
-    and only resolves in the grid.
+    Returns radial bands and angular octants SEPARATELY, and does not
+    return the band x octant grid. A defect confined to one sector is
+    diluted in either marginal alone; resolving it requires crossing the
+    two, which is composition and therefore must come from filters
+    rather than from the tool.
     """
     df, f = _apply(_load(csv), filters)
     if test_txt:
@@ -227,17 +229,11 @@ def get_yield_by_region(csv, test_txt=None, filters=None):
                for k, s in df.groupby("REGION", observed=True)]
     by_oct = [{"octant": str(k), "fail_rate_pct": _fail_rate(s)}
               for k, s in df.groupby("OCTANT", observed=True)]
-    grid = [{"region": str(k[0]), "octant": str(k[1]),
-             "runs": int(len(s)), "fail_rate_pct": _fail_rate(s)}
-            for k, s in df.groupby(["REGION", "OCTANT"], observed=True)
-            if len(s) > 0]
-
     return _wrap(df, f, {
         "test": test_txt or "all",
         "band_edges_normalised_radius": _BANDS,
         "by_radial_band": by_band,
         "by_octant": by_oct,
-        "region_x_octant": grid,
     })
 
 
@@ -295,8 +291,8 @@ def get_distribution_stats(csv, test_txt, group_by=None, filters=None):
     if group_by is None:
         return _wrap(df, f, {"test": test_txt, "units": units, "overall": _stats(df)})
 
-    if group_by not in GROUP_FIELDS + ["TEMP_C", "VDD", "REGION"]:
-        return {"error": f"group_by must be one of {GROUP_FIELDS + ['TEMP_C','VDD','REGION']}"}
+    if group_by not in GROUP_FIELDS + ["TEMP_C", "VDD", "REGION", "OCTANT"]:
+        return {"error": f"group_by must be one of {GROUP_FIELDS + ['TEMP_C','VDD','REGION','OCTANT']}"}
 
     groups = []
     for key, sub in df.groupby(group_by, observed=True):

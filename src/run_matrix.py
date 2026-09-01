@@ -34,8 +34,23 @@ TRUTH = {
     "defect_4d": {"LOT_ID", "SPATIAL", "TEMP_C", "VDD"},
 }
 
-FIELDS = ["config", "dataset", "rep", "declared",
+# Values behind each dimension, as substrings to look for in what the
+# agent declared. Scored separately from the dimensions: an agent can
+# name the right axis and still get the value wrong.
+TRUTH_VALUES = {
+    "clean": {},
+    "defect_4d": {
+        "LOT_ID":  ["L47", "L48"],
+        "TEMP_C":  ["85"],
+        "VDD":     ["0.75"],
+        "SPATIAL": ["NW"],
+    },
+}
+
+FIELDS = ["config", "dataset", "rep", "declared", "values",
+          "structure", "evidence", "structure_correct",
           "n_correct", "n_spurious", "exact", "missed",
+          "n_values_correct", "values_exact",
           "turns", "tool_calls", "filtered_calls", "stop_reason",
           "warned", "cited_numbers", "input_tokens", "output_tokens",
           "seconds", "error"]
@@ -56,6 +71,24 @@ def score(declared, truth):
             "missed": "|".join(sorted(truth - d))}
 
 
+def score_values(declared, truth):
+    """
+    Count how many dimensions were given the correct value.
+
+    A dimension counts as correct if every expected value appears
+    somewhere in what the agent wrote for it, so "edge NW" matches an
+    expected "NW". Only dimensions present in the truth are checked.
+    """
+    if declared is None or not truth:
+        return {"n_values_correct": "", "values_exact": ""}
+    n = 0
+    for dim, want in truth.items():
+        got = " ".join(declared.get(dim, [])).upper()
+        if got and all(w.upper() in got for w in want):
+            n += 1
+    return {"n_values_correct": n, "values_exact": int(n == len(truth))}
+
+
 def one_run(config, dataset, rep):
     csv_path = ROOT / "data" / f"{dataset}.csv"
     gate = ROOT / "runs" / f"gate_{dataset}.txt"
@@ -74,6 +107,15 @@ def one_run(config, dataset, rep):
     row.update({
         "declared": "|".join(r["dimensions"]) if r["dimensions"] is not None
                     else "NO_ANSWER_LINE",
+        "values": "; ".join(f"{k}={','.join(v)}" for k, v in
+                            (r["values"] or {}).items()) or "",
+        "structure": r["structure"] or "",
+        "evidence": r["evidence"] or "",
+        # the injected condition is confined to an intersection; on the
+        # control the correct structural answer is none
+        "structure_correct": int(r["structure"] ==
+                                 ("interaction" if dataset == "defect_4d"
+                                  else "none")) if r["structure"] else "",
         "turns": r["turns"],
         "tool_calls": r["tool_calls"],
         "filtered_calls": r["filtered_calls"],
@@ -85,6 +127,7 @@ def one_run(config, dataset, rep):
         "seconds": round(time.time() - t0, 1),
     })
     row.update(score(r["dimensions"], TRUTH[dataset]))
+    row.update(score_values(r["values"], TRUTH_VALUES[dataset]))
     return row, r
 
 
@@ -137,6 +180,7 @@ def main():
     print(f"\n{len(ok)}/{len(rows)} completed in {(time.time()-t0)/60:.1f} min, "
           f"{sum(r['input_tokens'] for r in ok):,} input tokens")
     print(f"\n{'config':<11}{'dataset':<11}{'exact':>7}{'correct':>9}"
+          f"{'values':>8}{'inter':>7}{'meas':>6}"
           f"{'spurious':>10}{'turns':>7}{'filtered':>10}")
     for config in configs:
         for dataset in TRUTH:
@@ -145,9 +189,16 @@ def main():
             if not g:
                 continue
             avg = lambda k: sum(r[k] for r in g) / len(g)
+            vals = [r for r in g if r["n_values_correct"] != ""]
+            vstr = (f"{sum(r['n_values_correct'] for r in vals)/len(vals):>8.1f}"
+                    if vals else f"{'-':>8}")
+            ni = sum(r["structure"] == "interaction" for r in g)
+            nm = sum(r["evidence"] == "measured" for r in g)
             print(f"{config:<11}{dataset:<11}"
                   f"{sum(r['exact'] for r in g):>4}/{len(g):<2}"
-                  f"{avg('n_correct'):>9.1f}{avg('n_spurious'):>10.1f}"
+                  f"{avg('n_correct'):>9.1f}{vstr}"
+                  f"{ni:>4}/{len(g):<2}{nm:>3}/{len(g):<2}"
+                  f"{avg('n_spurious'):>10.1f}"
                   f"{avg('turns'):>7.1f}{avg('filtered_calls'):>10.1f}")
     print(f"\nwrote {out}")
 

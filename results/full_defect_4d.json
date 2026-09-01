@@ -1,0 +1,977 @@
+{
+  "config": "full",
+  "dataset": "defect_4d",
+  "metrics": {
+    "declared": "LOT_ID|TEMP_C|VDD|SPATIAL",
+    "values": {
+      "LOT_ID": [
+        "L47",
+        "L48"
+      ],
+      "TEMP_C": [
+        "85"
+      ],
+      "VDD": [
+        "0.75"
+      ],
+      "SPATIAL": [
+        "edge N",
+        "NW"
+      ]
+    },
+    "structure": "interaction",
+    "evidence": "measured",
+    "turns": 12,
+    "tool_calls": 25,
+    "filtered_calls": 18,
+    "distinct_tools": 6,
+    "tool_errors": 0,
+    "stop_reason": "end_turn",
+    "input_tokens": 97581,
+    "output_tokens": 4611
+  },
+  "calls": [
+    {
+      "turn": 1,
+      "tool": "get_overall_yield",
+      "args": {},
+      "error": false
+    },
+    {
+      "turn": 1,
+      "tool": "get_failures_by_test",
+      "args": {},
+      "error": false
+    },
+    {
+      "turn": 2,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "LOT_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 2,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "WAFER_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 2,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "SITE_NUM"
+      },
+      "error": false
+    },
+    {
+      "turn": 3,
+      "tool": "get_fail_rate_by_condition",
+      "args": {},
+      "error": false
+    },
+    {
+      "turn": 3,
+      "tool": "get_yield_by_region",
+      "args": {},
+      "error": false
+    },
+    {
+      "turn": 4,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 4,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L44",
+            "L45",
+            "L46"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 5,
+      "tool": "get_yield_by_region",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 5,
+      "tool": "get_yield_by_region",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L44",
+            "L45",
+            "L46"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 6,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ],
+          "OCTANT": [
+            "N",
+            "NW"
+          ],
+          "REGION": "edge"
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 6,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ],
+          "OCTANT": [
+            "N",
+            "NW"
+          ],
+          "REGION": "edge",
+          "TEMP_C": 85
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 6,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ],
+          "OCTANT": [
+            "N",
+            "NW"
+          ],
+          "REGION": "edge",
+          "VDD": 0.75
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 7,
+      "tool": "get_failures_by_test",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ],
+          "OCTANT": [
+            "N",
+            "NW"
+          ],
+          "REGION": "edge",
+          "TEMP_C": 85,
+          "VDD": 0.75
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 7,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "core_fmax",
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 7,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "pll_lock",
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 8,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "core_fmax",
+        "filters": {
+          "LOT_ID": [
+            "L44",
+            "L45",
+            "L46"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 8,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "vmin_core",
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 8,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "vmin_core",
+        "filters": {
+          "LOT_ID": [
+            "L44",
+            "L45",
+            "L46"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 9,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "WAFER_ID",
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 10,
+      "tool": "get_yield_by_region",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ],
+          "WAFER_ID": "W01"
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 10,
+      "tool": "get_yield_by_region",
+      "args": {
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ],
+          "WAFER_ID": [
+            "W02",
+            "W03",
+            "W04",
+            "W05"
+          ]
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 11,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "SITE_NUM",
+        "filters": {
+          "LOT_ID": [
+            "L47",
+            "L48"
+          ],
+          "OCTANT": [
+            "N",
+            "NW"
+          ],
+          "REGION": "edge"
+        }
+      },
+      "error": false
+    },
+    {
+      "turn": 11,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "SITE_NUM",
+        "filters": {
+          "LOT_ID": [
+            "L44",
+            "L45",
+            "L46"
+          ],
+          "OCTANT": [
+            "N",
+            "NW"
+          ],
+          "REGION": "edge"
+        }
+      },
+      "error": false
+    }
+  ],
+  "report": "The poor yields in L47-L48 N/NW edge (site yields 0-60%) vs. good lots L44-L46 N/NW edge (site yields 87-100%) confirm this is a material/process defect in the lots, not a tester artifact. All sites see the same pattern.\n\nNow I have sufficient data to form my conclusion. Let me summarize:\n\n---\n\nROOT_CAUSE_DIMENSIONS: LOT_ID, TEMP_C, VDD, SPATIAL\n\nROOT_CAUSE_VALUES: LOT_ID=L47,L48; TEMP_C=85; VDD=0.75; SPATIAL=edge N,NW\n\nROOT_CAUSE_STRUCTURE: interaction\n\nROOT_CAUSE_EVIDENCE: measured\n\nFINDINGS\n\n1. Overall yield is 91.6% (315 failed parts of 3750). Lots L47 and L48 show 85.33% and 86.13% yield respectively, vs. 95%+ for L44-L46 (get_yield_summary LOT_ID filter).\n\n2. Primary failing tests are core_fmax (0.764%), pll_lock (0.711%), and vmin_core (0.684%), all performance/voltage marginal tests (get_failures_by_test).\n\n3. At TEMP_C=85\u00b0C, overall fail rate is 0.805% vs. 0.107-0.171% at lower temperatures. At VDD=0.75V, overall fail rate is 0.783% vs. 0.142-0.157% at higher voltages (get_fail_rate_by_condition).\n\n4. Spatial analysis shows N octant (0.917% fail) and NW octant (0.895% fail) much worse than other regions; edge band shows 0.535% vs. centre 0.158% (get_yield_by_region).\n\n5. In L47+L48 only, at TEMP_C=85: fail rate 1.78% vs. 0.156% in L44-L46. At VDD=0.75: fail rate 1.716% in L47+L48 vs. 0.164% in L44-L46 (get_fail_rate_by_condition LOT_ID filters).\n\n6. In L47+L48, octants N and NW show 2.062% and 2.048% fail rates respectively, with edge at 1.059%, vs. L44-L46 with 0.153%, 0.127%, and 0.186% in same regions (get_yield_by_region LOT_ID filters).\n\n7. Combined effect in L47+L48 at N/NW edge: VDD=0.75 shows 9.78% fail rate; TEMP_C=85 shows 9.733% fail rate; both simultaneously shows 28.543% fail rate (get_fail_rate_by_condition with LOT_ID, OCTANT, REGION, and stress parameter filters).\n\n8. At the worst condition (L47+L48, N/NW edge, TEMP_C=85, VDD=0.75): core_fmax fails 76.4% (42/55), vmin_core fails 75.0% (39/52), pll_lock fails 59.7% (37/62) (get_failures_by_test with full filter).\n\n9. Distribution analysis: L47+L48 core_fmax has mean 3.8448 GHz with 2.57\u03c3 margin to lower limit (3.61 GHz), vs. L44-L46 with mean 3.848 GHz and 2.99\u03c3 margin (get_distribution_stats core_fmax).\n\n10. Distribution analysis: L47+L48 vmin_core has mean 0.721V with 2.67\u03c3 margin to upper limit (0.765V), vs. L44-L46 with mean 0.7203V and 2.99\u03c3 margin (get_distribution_stats vmin_core).\n\n11. Spatial pattern is consistent across all wafers in L47+L48 (W01-W05 all show N/NW edge defects), ruling out wafer-specific issues (get_yield_by_region LOT_ID and WAFER_ID filters).\n\n12. All tester sites (1-8) show the same spatial pattern in L47+L48 N/NW edge (0-60% yield vs. 87-100% in good lots), ruling out tester contribution (get_yield_summary SITE_NUM filter).\n\nRULED OUT\n\n- Single test failure: Multiple tests fail systematically (core_fmax, vmin_core, pll_lock); not a single test circuit issue.\n- Tester site effect: All eight sites show identical spatial defect pattern; sites 3, 6, 8 achieve 60%+ yield in L47+L48 N/NW edge.\n- Wafer-specific defect: Pattern consistent across W01-W05 within L47-L48 lots.\n- Temperature or voltage alone: Stress conditions drive failures in L47+L48 only; L44-L46 stable across all conditions.\n\nASSESSMENT\n\nThe data establish a clear three-way interaction between lot, test conditions, and spatial location. Lots L47 and L48 exhibit degraded electrical specifications\u2014reduced maximum operating frequency and elevated minimum operating voltage\u2014concentrated most severely in the N and NW edge regions. This is consistent with a localized process defect (e.g., metal contamination, dopant variation, or thermal process excursion) during fabrication of those lots, affecting a specific die population.\n\nThe 28.543% failure rate at the intersection of worst-case conditions (TEMP_C=85, VDD=0.75) in the affected spatial region is a measured value, not inferred. The three dimensions co-occur to produce failures; L44-L46 show no such pattern, confirming this is lot-dependent.\n\nThe failure mechanism is performance marginality driven by both stress (high temperature, low voltage) and silicon defect concentration in specific wafer regions.\n\nRECOMMENDED NEXT STEP\n\n1. **Immediate:** Quarantine remaining die from L47 and L48, particularly from wafer positions corresponding to the N and NW edge octants. Implement 100% functional test at worst-case conditions (85\u00b0C, 0.75V) for these lots if use is unavoidable, or scrap.\n\n2. **Root cause investigation:** Examine process documentation for L47 and L48 for deviations during metallization, implant, or thermal steps that could create spatial contamination or doping gradients. Compare tool-by-tool wafer maps for dopant uniformity or metal coverage anomalies.\n\n3. **Verification:** Pull control wafers from L44-L46 (known-good) and L47-L48 (failed) for physical FA (SEM, EDX, SIMS) focused on N/NW edge die. Check for metal voids, dopant clustering, or oxide defects.\n\n4. **Process follow-up:** After root cause is identified, implement corrective action and process monitoring for subsequent lots to prevent recurrence.",
+  "transcript": [
+    {
+      "role": "user",
+      "content": "A lot group has been flagged for review.\n\nDatalog: data/defect_4d.csv\n\nInvestigate and report your conclusion."
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "I'll investigate the yield excursion in the flagged lot group. Let me start by getting an overall view of the data."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_overall_yield",
+          "input": {}
+        },
+        {
+          "type": "tool_use",
+          "name": "get_failures_by_test",
+          "input": {}
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01KCMy52U922fjKA23vHiVfd",
+          "content": "{\"rows\": 112500, \"parts\": 3750, \"parts_failed\": 315, \"part_yield_pct\": 91.6, \"measurement_fail_rate_pct\": 0.361}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01DXdPfUtkopwuQR3swxUYFf",
+          "content": "{\"rows\": 112500, \"tests\": [{\"test\": \"core_fmax\", \"runs\": 11250, \"fails\": 86, \"fail_rate_pct\": 0.764}, {\"test\": \"pll_lock\", \"runs\": 11250, \"fails\": 80, \"fail_rate_pct\": 0.711}, {\"test\": \"vmin_core\", \"runs\": 11250, \"fails\": 77, \"fail_rate_pct\": 0.684}, {\"test\": \"sram_bist\", \"runs\": 11250, \"fails\": 70, \"fail_rate_pct\": 0.622}, {\"test\": \"vmin_sram\", \"runs\": 11250, \"fails\": 20, \"fail_rate_pct\": 0.178}, {\"test\": \"idd_static\", \"runs\": 11250, \"fails\": 16, \"fail_rate_pct\": 0.142}, {\"test\": \"thermal_diode\", \"runs\": 11250, \"fails\": 16, \"fail_rate_pct\": 0.142}, {\"test\": \"idd_dynamic\", \"runs\": 11250, \"fails\": 15, \"fail_rate_pct\": 0.133}, {\"test\": \"scan_stuck_at\", \"runs\": 11250, \"fails\": 15, \"fail_rate_pct\": 0.133}, {\"test\": \"io_leakage\", \"runs\": 11250, \"fails\": 11, \"fail_rate_pct\": 0.098}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Overall yield is 91.6% with 315 failed parts out of 3750. The dominant failing tests are core_fmax (0.764%), pll_lock (0.711%), and vmin_core (0.684%). Let me check for lot, wafer, and site effects."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "LOT_ID"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "WAFER_ID"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "SITE_NUM"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01ACZvaCFuaW6S44rgqTkaEg",
+          "content": "{\"rows\": 112500, \"group_by\": \"LOT_ID\", \"groups\": [{\"LOT_ID\": \"L47\", \"parts\": 750, \"part_yield_pct\": 85.33, \"fail_rate_pct\": 0.689}, {\"LOT_ID\": \"L48\", \"parts\": 750, \"part_yield_pct\": 86.13, \"fail_rate_pct\": 0.662}, {\"LOT_ID\": \"L45\", \"parts\": 750, \"part_yield_pct\": 95.07, \"fail_rate_pct\": 0.164}, {\"LOT_ID\": \"L44\", \"parts\": 750, \"part_yield_pct\": 95.73, \"fail_rate_pct\": 0.142}, {\"LOT_ID\": \"L46\", \"parts\": 750, \"part_yield_pct\": 95.73, \"fail_rate_pct\": 0.147}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01ReEeSEAgTU2V9yQNzhALz3",
+          "content": "{\"rows\": 112500, \"group_by\": \"WAFER_ID\", \"groups\": [{\"WAFER_ID\": \"W01\", \"parts\": 750, \"part_yield_pct\": 90.13, \"fail_rate_pct\": 0.431}, {\"WAFER_ID\": \"W03\", \"parts\": 750, \"part_yield_pct\": 91.07, \"fail_rate_pct\": 0.364}, {\"WAFER_ID\": \"W04\", \"parts\": 750, \"part_yield_pct\": 92.0, \"fail_rate_pct\": 0.351}, {\"WAFER_ID\": \"W05\", \"parts\": 750, \"part_yield_pct\": 92.0, \"fail_rate_pct\": 0.342}, {\"WAFER_ID\": \"W02\", \"parts\": 750, \"part_yield_pct\": 92.8, \"fail_rate_pct\": 0.316}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01NASJXDHFQLwWFXEoKW67uN",
+          "content": "{\"rows\": 112500, \"group_by\": \"SITE_NUM\", \"groups\": [{\"SITE_NUM\": 3, \"parts\": 475, \"part_yield_pct\": 90.32, \"fail_rate_pct\": 0.379}, {\"SITE_NUM\": 4, \"parts\": 475, \"part_yield_pct\": 90.32, \"fail_rate_pct\": 0.414}, {\"SITE_NUM\": 5, \"parts\": 475, \"part_yield_pct\": 90.53, \"fail_rate_pct\": 0.456}, {\"SITE_NUM\": 1, \"parts\": 475, \"part_yield_pct\": 91.37, \"fail_rate_pct\": 0.4}, {\"SITE_NUM\": 7, \"parts\": 450, \"part_yield_pct\": 91.56, \"fail_rate_pct\": 0.363}, {\"SITE_NUM\": 6, \"parts\": 475, \"part_yield_pct\": 92.0, \"fail_rate_pct\": 0.33}, {\"SITE_NUM\": 8, \"parts\": 450, \"part_yield_pct\": 93.33, \"fail_rate_pct\": 0.267}, {\"SITE_NUM\": 2, \"parts\": 475, \"part_yield_pct\": 93.47, \"fail_rate_pct\": 0.274}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Clear lot effect: L47 and L48 have 85.33% and 86.13% yield, while L44-L46 are around 95.7%. W01 also shows lower yield (90.13%) compared to others. Let me check test conditions now."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {}
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {}
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01H3sijAc24XoLDDHEGacPPJ",
+          "content": "{\"rows\": 112500, \"test\": \"all\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.107}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.171}, {\"TEMP_C\": 85, \"fail_rate_pct\": 0.805}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 0.783}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.142}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.157}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01YHVG7LDNKwc4rGo8Hd25AR",
+          "content": "{\"rows\": 112500, \"test\": \"all\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.158}, {\"region\": \"mid\", \"fail_rate_pct\": 0.133}, {\"region\": \"outer\", \"fail_rate_pct\": 0.378}, {\"region\": \"edge\", \"fail_rate_pct\": 0.535}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.142}, {\"octant\": \"N\", \"fail_rate_pct\": 0.917}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.121}, {\"octant\": \"NW\", \"fail_rate_pct\": 0.895}, {\"octant\": \"S\", \"fail_rate_pct\": 0.118}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.17}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.133}, {\"octant\": \"W\", \"fail_rate_pct\": 0.458}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Strong voltage and temperature effects found. Most striking: VDD=0.75 shows 0.783% fail rate vs. 0.142-0.157% at higher voltages, and TEMP_C=85 shows 0.805% fail rate vs. 0.107-0.171% at lower temperatures. Also strong spatial effects: octants N (0.917%) and NW (0.895%) are much worse than others.\n\nLet me now investigate the interaction between these dimensions. First, let me check if the poor lots (L47, L48) are concentrated in specific test conditions."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L44",
+                "L45",
+                "L46"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01N7BGqj13ECwNqdq8gDe924",
+          "content": "{\"rows\": 45000, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"]}, \"test\": \"all\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.093}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.153}, {\"TEMP_C\": 85, \"fail_rate_pct\": 1.78}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 1.716}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.134}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.179}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01HMayu6H6SaQCYhGwTZMMiV",
+          "content": "{\"rows\": 67500, \"filters_applied\": {\"LOT_ID\": [\"L44\", \"L45\", \"L46\"]}, \"test\": \"all\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.116}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.182}, {\"TEMP_C\": 85, \"fail_rate_pct\": 0.156}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 0.164}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.147}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.142}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Striking difference! In L47+L48, at TEMP_C=85: 1.78% fail rate, and at VDD=0.75: 1.716% fail rate. In contrast, the good lots L44-L46 show 0.156% at TEMP_C=85 and only 0.164% at VDD=0.75. This suggests L47+L48 have a voltage/temperature sensitivity problem.\n\nLet me check the spatial distribution within these poor lots."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L44",
+                "L45",
+                "L46"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01Y26cphqueB9n9zBpM2VGC4",
+          "content": "{\"rows\": 45000, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"]}, \"test\": \"all\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.125}, {\"region\": \"mid\", \"fail_rate_pct\": 0.139}, {\"region\": \"outer\", \"fail_rate_pct\": 0.796}, {\"region\": \"edge\", \"fail_rate_pct\": 1.059}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.146}, {\"octant\": \"N\", \"fail_rate_pct\": 2.062}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.19}, {\"octant\": \"NW\", \"fail_rate_pct\": 2.048}, {\"octant\": \"S\", \"fail_rate_pct\": 0.098}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.076}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.127}, {\"octant\": \"W\", \"fail_rate_pct\": 0.812}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01EHdT7Zm3iWVAywPR6njtYx",
+          "content": "{\"rows\": 67500, \"filters_applied\": {\"LOT_ID\": [\"L44\", \"L45\", \"L46\"]}, \"test\": \"all\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.181}, {\"region\": \"mid\", \"fail_rate_pct\": 0.13}, {\"region\": \"outer\", \"fail_rate_pct\": 0.099}, {\"region\": \"edge\", \"fail_rate_pct\": 0.186}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.139}, {\"octant\": \"N\", \"fail_rate_pct\": 0.153}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.074}, {\"octant\": \"NW\", \"fail_rate_pct\": 0.127}, {\"octant\": \"S\", \"fail_rate_pct\": 0.131}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.232}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.138}, {\"octant\": \"W\", \"fail_rate_pct\": 0.222}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Remarkable! In L47+L48, the N octant shows 2.062% fail rate and NW shows 2.048%, with edge at 1.059%. In L44-L46, those same regions show only 0.153%, 0.127%, and 0.186% respectively. The spatial pattern in poor lots is highly localized to the N and NW edge regions.\n\nLet me verify this interaction by checking the combined effect: L47+L48 at the N/NW edge region under stress conditions."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ],
+              "OCTANT": [
+                "N",
+                "NW"
+              ],
+              "REGION": "edge"
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ],
+              "OCTANT": [
+                "N",
+                "NW"
+              ],
+              "REGION": "edge",
+              "TEMP_C": 85
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ],
+              "OCTANT": [
+                "N",
+                "NW"
+              ],
+              "REGION": "edge",
+              "VDD": 0.75
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01AZ7EXrWvSNymRN4M1JxCdL",
+          "content": "{\"rows\": 4500, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"], \"OCTANT\": [\"N\", \"NW\"], \"REGION\": \"edge\"}, \"test\": \"all\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.2}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.4}, {\"TEMP_C\": 85, \"fail_rate_pct\": 9.733}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 9.78}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.134}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.4}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01FngvygxwVmBBEeYBkk11zJ",
+          "content": "{\"rows\": 1500, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"], \"OCTANT\": [\"N\", \"NW\"], \"REGION\": \"edge\", \"TEMP_C\": 85}, \"test\": \"all\", \"by_temperature\": [{\"TEMP_C\": 85, \"fail_rate_pct\": 9.733}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 28.543}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.0}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.198}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01MCbdRCRrnHhRv4eYNfVN3m",
+          "content": "{\"rows\": 1503, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"], \"OCTANT\": [\"N\", \"NW\"], \"REGION\": \"edge\", \"VDD\": 0.75}, \"test\": \"all\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.216}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.188}, {\"TEMP_C\": 85, \"fail_rate_pct\": 28.543}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 9.78}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Exceptional findings! When all three dimensions align in L47+L48:\n- At N/NW edge only: 9.78% fail rate (VDD=0.75) and 9.733% (TEMP_C=85)\n- At N/NW edge with TEMP_C=85 AND VDD=0.75: **28.543% fail rate** \n\nThis is a catastrophic interaction. Now let me identify which tests are driving this and check the specific distributions."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_failures_by_test",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ],
+              "OCTANT": [
+                "N",
+                "NW"
+              ],
+              "REGION": "edge",
+              "TEMP_C": 85,
+              "VDD": 0.75
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "core_fmax",
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "pll_lock",
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01N7CGC76LbWLhTAmddKYCHe",
+          "content": "{\"rows\": 508, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"], \"OCTANT\": [\"N\", \"NW\"], \"REGION\": \"edge\", \"TEMP_C\": 85, \"VDD\": 0.75}, \"tests\": [{\"test\": \"core_fmax\", \"runs\": 55, \"fails\": 42, \"fail_rate_pct\": 76.364}, {\"test\": \"vmin_core\", \"runs\": 52, \"fails\": 39, \"fail_rate_pct\": 75.0}, {\"test\": \"sram_bist\", \"runs\": 44, \"fails\": 27, \"fail_rate_pct\": 61.364}, {\"test\": \"pll_lock\", \"runs\": 62, \"fails\": 37, \"fail_rate_pct\": 59.677}, {\"test\": \"idd_dynamic\", \"runs\": 56, \"fails\": 0, \"fail_rate_pct\": 0.0}, {\"test\": \"idd_static\", \"runs\": 46, \"fails\": 0, \"fail_rate_pct\": 0.0}, {\"test\": \"scan_stuck_at\", \"runs\": 46, \"fails\": 0, \"fail_rate_pct\": 0.0}, {\"test\": \"io_leakage\", \"runs\": 51, \"fails\": 0, \"fail_rate_pct\": 0.0}, {\"test\": \"thermal_diode\", \"runs\": 56, \"fails\": 0, \"fail_rate_pct\": 0.0}, {\"test\": \"vmin_sram\", \"runs\": 40, \"fails\": 0, \"fail_rate_pct\": 0.0}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01AiiFahR7n4cMJkxpE5SZtB",
+          "content": "{\"rows\": 4500, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"]}, \"test\": \"core_fmax\", \"units\": \"GHz\", \"overall\": {\"n\": 4500, \"mean\": 3.8448, \"std\": 0.0915, \"p05\": 3.6966, \"p50\": 3.8493, \"p95\": 3.9828, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.57, \"nearest_limit\": \"LO\"}}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01LkNmYcHXprPxyzjL5A1hEe",
+          "content": "{\"rows\": 4500, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"]}, \"test\": \"pll_lock\", \"units\": \"us\", \"overall\": {\"n\": 4500, \"mean\": 45.2529, \"std\": 4.4587, \"p05\": 38.4198, \"p50\": 45.0284, \"p95\": 52.4266, \"lo_limit\": 21.0, \"hi_limit\": 57.0, \"margin_sigma\": 2.63, \"nearest_limit\": \"HI\"}}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Perfect diagnostic data. In the worst condition (L47+L48 at N/NW edge, TEMP_C=85, VDD=0.75):\n- core_fmax: 76.364% fail rate (42 of 55)\n- vmin_core: 75.0% fail rate (39 of 52)\n- pll_lock: 59.677% fail rate (37 of 62)\n\nFor L47+L48 overall, core_fmax shows mean 3.8448 GHz with margin_sigma=2.57\u03c3 to the lower limit (3.61 GHz), indicating the distribution has shifted down. Let me compare this to the good lots."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "core_fmax",
+            "filters": {
+              "LOT_ID": [
+                "L44",
+                "L45",
+                "L46"
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "vmin_core",
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "vmin_core",
+            "filters": {
+              "LOT_ID": [
+                "L44",
+                "L45",
+                "L46"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01NHZ23pk8doQf1apr5A4KwB",
+          "content": "{\"rows\": 6750, \"filters_applied\": {\"LOT_ID\": [\"L44\", \"L45\", \"L46\"]}, \"test\": \"core_fmax\", \"units\": \"GHz\", \"overall\": {\"n\": 6750, \"mean\": 3.848, \"std\": 0.0796, \"p05\": 3.7163, \"p50\": 3.8472, \"p95\": 3.9782, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.99, \"nearest_limit\": \"LO\"}}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_011uyzcfMkzyAeU8hrXr9S1c",
+          "content": "{\"rows\": 4500, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"]}, \"test\": \"vmin_core\", \"units\": \"V\", \"overall\": {\"n\": 4500, \"mean\": 0.721, \"std\": 0.0165, \"p05\": 0.695, \"p50\": 0.7204, \"p95\": 0.7475, \"lo_limit\": 0.63, \"hi_limit\": 0.765, \"margin_sigma\": 2.67, \"nearest_limit\": \"HI\"}}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01AsyzuFhxcup4Qk34KcUDNe",
+          "content": "{\"rows\": 6750, \"filters_applied\": {\"LOT_ID\": [\"L44\", \"L45\", \"L46\"]}, \"test\": \"vmin_core\", \"units\": \"V\", \"overall\": {\"n\": 6750, \"mean\": 0.7203, \"std\": 0.015, \"p05\": 0.6957, \"p50\": 0.7203, \"p95\": 0.7449, \"lo_limit\": 0.63, \"hi_limit\": 0.765, \"margin_sigma\": 2.99, \"nearest_limit\": \"HI\"}}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Excellent confirmation of the root cause. Comparing the good lots (L44-L46) vs. bad lots (L47-L48):\n\n**core_fmax (GHz):**\n- L44-L46: mean=3.848, margin_sigma=2.99\u03c3 (comfortable margin)\n- L47-L48: mean=3.8448, margin_sigma=2.57\u03c3 (tighter margin to lower limit)\n\n**vmin_core (V):**\n- L44-L46: mean=0.7203, margin_sigma=2.99\u03c3\n- L47-L48: mean=0.721, margin_sigma=2.67\u03c3 (tighter margin to upper limit)\n\nThe distributions in L47-L48 are shifted to worse values (lower fmax, higher minimum voltage), reducing the safety margin to limits. This is exacerbated in the edge/corner regions (N, NW) and under worst-case test conditions (TEMP_C=85, VDD=0.75).\n\nNow let me verify whether W01 (the wafer with lower yield) is involved in these poor lots."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "WAFER_ID",
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01VBZNpiZkbtoEow8yeZ2wFf",
+          "content": "{\"rows\": 45000, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"]}, \"group_by\": \"WAFER_ID\", \"groups\": [{\"WAFER_ID\": \"W01\", \"parts\": 300, \"part_yield_pct\": 83.67, \"fail_rate_pct\": 0.8}, {\"WAFER_ID\": \"W05\", \"parts\": 300, \"part_yield_pct\": 85.67, \"fail_rate_pct\": 0.667}, {\"WAFER_ID\": \"W04\", \"parts\": 300, \"part_yield_pct\": 86.0, \"fail_rate_pct\": 0.678}, {\"WAFER_ID\": \"W02\", \"parts\": 300, \"part_yield_pct\": 86.67, \"fail_rate_pct\": 0.633}, {\"WAFER_ID\": \"W03\", \"parts\": 300, \"part_yield_pct\": 86.67, \"fail_rate_pct\": 0.6}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Yes, W01 is within L47+L48 and shows the worst yield (83.67%) among those lots. Now let me check if the spatial defect in L47-L48 is consistent with a single root cause by examining whether it occurs in all wafers of these lots."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ],
+              "WAFER_ID": "W01"
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ],
+              "WAFER_ID": [
+                "W02",
+                "W03",
+                "W04",
+                "W05"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01Cp3RLhwSGZLfgRe956v6MW",
+          "content": "{\"rows\": 9000, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"], \"WAFER_ID\": \"W01\"}, \"test\": \"all\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.104}, {\"region\": \"mid\", \"fail_rate_pct\": 0.324}, {\"region\": \"outer\", \"fail_rate_pct\": 1.065}, {\"region\": \"edge\", \"fail_rate_pct\": 1.102}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.417}, {\"octant\": \"N\", \"fail_rate_pct\": 2.604}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.159}, {\"octant\": \"NW\", \"fail_rate_pct\": 2.063}, {\"octant\": \"S\", \"fail_rate_pct\": 0.098}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.152}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.159}, {\"octant\": \"W\", \"fail_rate_pct\": 1.042}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01BpropuD3cBaGTg6HaCCUKr",
+          "content": "{\"rows\": 36000, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"], \"WAFER_ID\": [\"W02\", \"W03\", \"W04\", \"W05\"]}, \"test\": \"all\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.13}, {\"region\": \"mid\", \"fail_rate_pct\": 0.093}, {\"region\": \"outer\", \"fail_rate_pct\": 0.729}, {\"region\": \"edge\", \"fail_rate_pct\": 1.048}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.078}, {\"octant\": \"N\", \"fail_rate_pct\": 1.927}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.198}, {\"octant\": \"NW\", \"fail_rate_pct\": 2.044}, {\"octant\": \"S\", \"fail_rate_pct\": 0.098}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.057}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.119}, {\"octant\": \"W\", \"fail_rate_pct\": 0.755}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "The spatial defect pattern (N and NW octants showing 2%+ failure rates) is consistent across all wafers in L47-L48. This is a lot-level phenomenon, not wafer-specific.\n\nLet me do one final check to rule out tester sites as a contributing factor to the spatial pattern."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "SITE_NUM",
+            "filters": {
+              "LOT_ID": [
+                "L47",
+                "L48"
+              ],
+              "OCTANT": [
+                "N",
+                "NW"
+              ],
+              "REGION": "edge"
+            }
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "SITE_NUM",
+            "filters": {
+              "LOT_ID": [
+                "L44",
+                "L45",
+                "L46"
+              ],
+              "OCTANT": [
+                "N",
+                "NW"
+              ],
+              "REGION": "edge"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01HLmLn1tM2DqgwmsdCSZgt7",
+          "content": "{\"rows\": 4500, \"filters_applied\": {\"LOT_ID\": [\"L47\", \"L48\"], \"OCTANT\": [\"N\", \"NW\"], \"REGION\": \"edge\"}, \"group_by\": \"SITE_NUM\", \"groups\": [{\"SITE_NUM\": 6, \"parts\": 10, \"part_yield_pct\": 0.0, \"fail_rate_pct\": 5.667}, {\"SITE_NUM\": 1, \"parts\": 20, \"part_yield_pct\": 20.0, \"fail_rate_pct\": 4.333}, {\"SITE_NUM\": 7, \"parts\": 20, \"part_yield_pct\": 25.0, \"fail_rate_pct\": 4.333}, {\"SITE_NUM\": 4, \"parts\": 20, \"part_yield_pct\": 30.0, \"fail_rate_pct\": 3.667}, {\"SITE_NUM\": 5, \"parts\": 20, \"part_yield_pct\": 35.0, \"fail_rate_pct\": 4.167}, {\"SITE_NUM\": 2, \"parts\": 10, \"part_yield_pct\": 40.0, \"fail_rate_pct\": 3.667}, {\"SITE_NUM\": 3, \"parts\": 20, \"part_yield_pct\": 60.0, \"fail_rate_pct\": 1.833}, {\"SITE_NUM\": 8, \"parts\": 30, \"part_yield_pct\": 60.0, \"fail_rate_pct\": 1.889}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01C2QVFHcMMA6bi3bxy9AniW",
+          "content": "{\"rows\": 6750, \"filters_applied\": {\"LOT_ID\": [\"L44\", \"L45\", \"L46\"], \"OCTANT\": [\"N\", \"NW\"], \"REGION\": \"edge\"}, \"group_by\": \"SITE_NUM\", \"groups\": [{\"SITE_NUM\": 2, \"parts\": 15, \"part_yield_pct\": 86.67, \"fail_rate_pct\": 0.667}, {\"SITE_NUM\": 7, \"parts\": 30, \"part_yield_pct\": 90.0, \"fail_rate_pct\": 0.333}, {\"SITE_NUM\": 3, \"parts\": 30, \"part_yield_pct\": 93.33, \"fail_rate_pct\": 0.222}, {\"SITE_NUM\": 4, \"parts\": 30, \"part_yield_pct\": 93.33, \"fail_rate_pct\": 0.222}, {\"SITE_NUM\": 8, \"parts\": 45, \"part_yield_pct\": 95.56, \"fail_rate_pct\": 0.148}, {\"SITE_NUM\": 1, \"parts\": 30, \"part_yield_pct\": 96.67, \"fail_rate_pct\": 0.111}, {\"SITE_NUM\": 5, \"parts\": 30, \"part_yield_pct\": 100.0, \"fail_rate_pct\": 0.0}, {\"SITE_NUM\": 6, \"parts\": 15, \"part_yield_pct\": 100.0, \"fail_rate_pct\": 0.0}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "The poor yields in L47-L48 N/NW edge (site yields 0-60%) vs. good lots L44-L46 N/NW edge (site yields 87-100%) confirm this is a material/process defect in the lots, not a tester artifact. All sites see the same pattern.\n\nNow I have sufficient data to form my conclusion. Let me summarize:\n\n---\n\nROOT_CAUSE_DIMENSIONS: LOT_ID, TEMP_C, VDD, SPATIAL\n\nROOT_CAUSE_VALUES: LOT_ID=L47,L48; TEMP_C=85; VDD=0.75; SPATIAL=edge N,NW\n\nROOT_CAUSE_STRUCTURE: interaction\n\nROOT_CAUSE_EVIDENCE: measured\n\nFINDINGS\n\n1. Overall yield is 91.6% (315 failed parts of 3750). Lots L47 and L48 show 85.33% and 86.13% yield respectively, vs. 95%+ for L44-L46 (get_yield_summary LOT_ID filter).\n\n2. Primary failing tests are core_fmax (0.764%), pll_lock (0.711%), and vmin_core (0.684%), all performance/voltage marginal tests (get_failures_by_test).\n\n3. At TEMP_C=85\u00b0C, overall fail rate is 0.805% vs. 0.107-0.171% at lower temperatures. At VDD=0.75V, overall fail rate is 0.783% vs. 0.142-0.157% at higher voltages (get_fail_rate_by_condition).\n\n4. Spatial analysis shows N octant (0.917% fail) and NW octant (0.895% fail) much worse than other regions; edge band shows 0.535% vs. centre 0.158% (get_yield_by_region).\n\n5. In L47+L48 only, at TEMP_C=85: fail rate 1.78% vs. 0.156% in L44-L46. At VDD=0.75: fail rate 1.716% in L47+L48 vs. 0.164% in L44-L46 (get_fail_rate_by_condition LOT_ID filters).\n\n6. In L47+L48, octants N and NW show 2.062% and 2.048% fail rates respectively, with edge at 1.059%, vs. L44-L46 with 0.153%, 0.127%, and 0.186% in same regions (get_yield_by_region LOT_ID filters).\n\n7. Combined effect in L47+L48 at N/NW edge: VDD=0.75 shows 9.78% fail rate; TEMP_C=85 shows 9.733% fail rate; both simultaneously shows 28.543% fail rate (get_fail_rate_by_condition with LOT_ID, OCTANT, REGION, and stress parameter filters).\n\n8. At the worst condition (L47+L48, N/NW edge, TEMP_C=85, VDD=0.75): core_fmax fails 76.4% (42/55), vmin_core fails 75.0% (39/52), pll_lock fails 59.7% (37/62) (get_failures_by_test with full filter).\n\n9. Distribution analysis: L47+L48 core_fmax has mean 3.8448 GHz with 2.57\u03c3 margin to lower limit (3.61 GHz), vs. L44-L46 with mean 3.848 GHz and 2.99\u03c3 margin (get_distribution_stats core_fmax).\n\n10. Distribution analysis: L47+L48 vmin_core has mean 0.721V with 2.67\u03c3 margin to upper limit (0.765V), vs. L44-L46 with mean 0.7203V and 2.99\u03c3 margin (get_distribution_stats vmin_core).\n\n11. Spatial pattern is consistent across all wafers in L47+L48 (W01-W05 all show N/NW edge defects), ruling out wafer-specific issues (get_yield_by_region LOT_ID and WAFER_ID filters).\n\n12. All tester sites (1-8) show the same spatial pattern in L47+L48 N/NW edge (0-60% yield vs. 87-100% in good lots), ruling out tester contribution (get_yield_summary SITE_NUM filter).\n\nRULED OUT\n\n- Single test failure: Multiple tests fail systematically (core_fmax, vmin_core, pll_lock); not a single test circuit issue.\n- Tester site effect: All eight sites show identical spatial defect pattern; sites 3, 6, 8 achieve 60%+ yield in L47+L48 N/NW edge.\n- Wafer-specific defect: Pattern consistent across W01-W05 within L47-L48 lots.\n- Temperature or voltage alone: Stress conditions drive failures in L47+L48 only; L44-L46 stable across all conditions.\n\nASSESSMENT\n\nThe data establish a clear three-way interaction between lot, test conditions, and spatial location. Lots L47 and L48 exhibit degraded electrical specifications\u2014reduced maximum operating frequency and elevated minimum operating voltage\u2014concentrated most severely in the N and NW edge regions. This is consistent with a localized process defect (e.g., metal contamination, dopant variation, or thermal process excursion) during fabrication of those lots, affecting a specific die population.\n\nThe 28.543% failure rate at the intersection of worst-case conditions (TEMP_C=85, VDD=0.75) in the affected spatial region is a measured value, not inferred. The three dimensions co-occur to produce failures; L44-L46 show no such pattern, confirming this is lot-dependent.\n\nThe failure mechanism is performance marginality driven by both stress (high temperature, low voltage) and silicon defect concentration in specific wafer regions.\n\nRECOMMENDED NEXT STEP\n\n1. **Immediate:** Quarantine remaining die from L47 and L48, particularly from wafer positions corresponding to the N and NW edge octants. Implement 100% functional test at worst-case conditions (85\u00b0C, 0.75V) for these lots if use is unavoidable, or scrap.\n\n2. **Root cause investigation:** Examine process documentation for L47 and L48 for deviations during metallization, implant, or thermal steps that could create spatial contamination or doping gradients. Compare tool-by-tool wafer maps for dopant uniformity or metal coverage anomalies.\n\n3. **Verification:** Pull control wafers from L44-L46 (known-good) and L47-L48 (failed) for physical FA (SEM, EDX, SIMS) focused on N/NW edge die. Check for metal voids, dopant clustering, or oxide defects.\n\n4. **Process follow-up:** After root cause is identified, implement corrective action and process monitoring for subsequent lots to prevent recurrence."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,629 @@
+{
+  "config": "reduced",
+  "dataset": "defect_4d",
+  "rep": 1,
+  "metrics": {
+    "config": "reduced",
+    "dataset": "defect_4d",
+    "rep": 1,
+    "error": "",
+    "declared": "LOT_ID|TEMP_C|VDD|SPATIAL",
+    "values": "LOT_ID=L47,L48; TEMP_C=85; VDD=0.75; SPATIAL=edge,N,NW",
+    "structure": "interaction",
+    "evidence": "inferred",
+    "structure_correct": 1,
+    "turns": 9,
+    "tool_calls": 23,
+    "filtered_calls": 0,
+    "stop_reason": "end_turn",
+    "warned": 0,
+    "cited_numbers": 1,
+    "input_tokens": 69932,
+    "output_tokens": 3732,
+    "seconds": 48.4,
+    "n_correct": 4,
+    "n_spurious": 0,
+    "exact": 1,
+    "missed": "",
+    "n_values_correct": 4,
+    "values_exact": 1
+  },
+  "calls": [
+    {
+      "turn": 1,
+      "tool": "get_overall_yield",
+      "args": {},
+      "error": false
+    },
+    {
+      "turn": 1,
+      "tool": "get_failures_by_test",
+      "args": {},
+      "error": false
+    },
+    {
+      "turn": 1,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "LOT_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 1,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "SITE_NUM"
+      },
+      "error": false
+    },
+    {
+      "turn": 1,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "WAFER_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 2,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "test_txt": "core_fmax"
+      },
+      "error": false
+    },
+    {
+      "turn": 2,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "test_txt": "pll_lock"
+      },
+      "error": false
+    },
+    {
+      "turn": 2,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "test_txt": "vmin_core"
+      },
+      "error": false
+    },
+    {
+      "turn": 2,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "test_txt": "sram_bist"
+      },
+      "error": false
+    },
+    {
+      "turn": 3,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "core_fmax",
+        "group_by": "LOT_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 3,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "pll_lock",
+        "group_by": "LOT_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 3,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "vmin_core",
+        "group_by": "LOT_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 3,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "sram_bist",
+        "group_by": "LOT_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 4,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "core_fmax",
+        "group_by": "TEMP_C"
+      },
+      "error": false
+    },
+    {
+      "turn": 4,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "core_fmax",
+        "group_by": "VDD"
+      },
+      "error": false
+    },
+    {
+      "turn": 4,
+      "tool": "get_yield_by_region",
+      "args": {
+        "test_txt": "core_fmax"
+      },
+      "error": false
+    },
+    {
+      "turn": 5,
+      "tool": "get_yield_by_region",
+      "args": {
+        "test_txt": "pll_lock"
+      },
+      "error": false
+    },
+    {
+      "turn": 5,
+      "tool": "get_yield_by_region",
+      "args": {
+        "test_txt": "vmin_core"
+      },
+      "error": false
+    },
+    {
+      "turn": 5,
+      "tool": "get_yield_by_region",
+      "args": {
+        "test_txt": "sram_bist"
+      },
+      "error": false
+    },
+    {
+      "turn": 6,
+      "tool": "get_yield_summary",
+      "args": {
+        "group_by": "WAFER_ID"
+      },
+      "error": false
+    },
+    {
+      "turn": 7,
+      "tool": "get_fail_rate_by_condition",
+      "args": {
+        "test_txt": "core_fmax"
+      },
+      "error": false
+    },
+    {
+      "turn": 8,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "core_fmax",
+        "group_by": "TEMP_C"
+      },
+      "error": false
+    },
+    {
+      "turn": 8,
+      "tool": "get_distribution_stats",
+      "args": {
+        "test_txt": "core_fmax",
+        "group_by": "VDD"
+      },
+      "error": false
+    }
+  ],
+  "report": "Based on my investigation, I have identified the root causes of the yield excursion. Let me summarize my findings:\n\n---\n\nROOT_CAUSE_DIMENSIONS: LOT_ID, TEMP_C, VDD, SPATIAL\n\nROOT_CAUSE_VALUES: LOT_ID=L47,L48; TEMP_C=85; VDD=0.75; SPATIAL=edge,N,NW\n\nROOT_CAUSE_STRUCTURE: interaction\n\nROOT_CAUSE_EVIDENCE: inferred\n\n---\n\nFINDINGS\n\n1. **Overall yield degradation:** 91.6% part yield with 315 failed parts out of 3,750 total (from get_overall_yield).\n\n2. **Lots L47 and L48 are significantly underperforming:** L47 yields 85.33% and L48 yields 86.13%, vs. L44 (95.73%), L45 (95.07%), and L46 (95.73%) \u2014 a gap of 10 percentage points (from get_yield_summary by LOT_ID).\n\n3. **Four tests dominate failures:** core_fmax (0.764%), pll_lock (0.711%), vmin_core (0.684%), and sram_bist (0.622%) account for ~2.8% of test runs failing (from get_failures_by_test).\n\n4. **All four failing tests show tight margins in L47 and L48:** Margin to nearest limit is 2.51\u20132.68\u03c3 for L47/L48 vs. 2.95\u20133.07\u03c3 for better lots across all four tests (from get_distribution_stats by LOT_ID), indicating these lots are biased closer to failure limits.\n\n5. **All four tests fail catastrophically at 85\u00b0C:** core_fmax 2.0%, pll_lock 1.893%, vmin_core 1.707%, sram_bist 1.573% vs. ~0.08\u20130.3% at 0\u00b0C or 25\u00b0C (from get_fail_rate_by_condition by temperature). At 85\u00b0C, margin drops to 2.51\u03c3 vs. 2.96\u20133.01\u03c3 at lower temps (from get_distribution_stats by TEMP_C).\n\n6. **All four tests fail catastrophically at VDD=0.75V:** core_fmax 2.05%, pll_lock 1.782%, vmin_core 1.657%, sram_bist 1.586% vs. 0.1\u20130.2% at 0.8V or 0.85V (from get_fail_rate_by_condition by voltage). At 0.75V, margin drops to 2.51\u03c3 vs. 2.97\u20132.98\u03c3 at higher voltages (from get_distribution_stats by VDD).\n\n7. **Spatial clustering on N, NW edge positions:** For core_fmax, NW octant has 2.286% failure rate and N octant 2.083%, vs. 0.078\u20130.19% in S/SE/SW octants. Edge region 1.204% vs. centre 0.25%. This pattern repeats for pll_lock (NW 2.349%, N 1.75% vs. centre 0.167%) and sram_bist (N 2.0%, NW 1.714% vs. centre 0.167%) (from get_yield_by_region).\n\nRULED OUT\n\n- **Site-level manufacturing defect:** Failure rates across 8 test sites are relatively uniform (90.32\u201393.47%), with site 2 and 8 only 3.1 percentage points better than site 3\u20135. Not a strong site signature (from get_yield_summary by SITE_NUM).\n\n- **Wafer-level effect alone:** W01 is worst at 90.13% yield but only 2.7 points worse than W02 (92.8%). Without lot-to-wafer mapping, spatial patterns alone don't isolate the problem to a single physical substrate (from get_yield_summary by WAFER_ID).\n\nASSESSMENT\n\nThe evidence reveals a **multi-factor yield excursion involving lots L47 and L48 that is triggered by a combination of stress conditions:**\n\n- L47 and L48 are biased **closer to lower specification limits** across all four dominant failing tests (2.5\u20132.7\u03c3 margin vs. 3.0\u03c3 nominal), likely due to process center shift during those manufacturing lots.\n- When stressed at **high temperature (85\u00b0C) and low supply voltage (0.75V) simultaneously**, these already-marginal parts fail at dramatically elevated rates (1.6\u20132.0% failure rate per test).\n- **Spatial effects** (N, NW octants and wafer edge) are also evident, suggesting possible **non-uniform die-to-die performance or thermal gradient across the wafer**, which compounds the margin problem.\n\nI observed these dimensions separately in the data (LOT+TEMP in separate breakdowns, LOT+VDD in separate breakdowns, SPATIAL independent of LOT breakdown, and VDD/TEMP also independent of SPATIAL). I did not retrieve a single result showing failure rates for the specific combination of (L47 OR L48) AND (85\u00b0C) AND (0.75V) AND (edge/N/NW) together. Therefore, the interaction is **inferred** from observing each factor independently contributing to the marginal condition.\n\nThe spatial clustering may indicate that specific die positions on L47/L48 wafers see higher local temperature, lower local voltage delivery, or intrinsic process variability.\n\nRECOMMENDED NEXT STEP\n\n1. **Cross-lot process fingerprint:** Obtain metrology (e.g., Vt, oxide thickness, dopant profile) on representative dies from L47, L48, and a good lot (L44 or L45) to determine if a systematic process excursion (dopant implant variation, anneal temperature, or etch uniformity) explains the lower parameter margins.\n\n2. **Thermal imaging or thermal simulation:** Perform thermal analysis of test setup or wafer mounting at the combination of 85\u00b0C and 0.75V to confirm whether the N/NW edge region experiences local temperature rise or voltage droop.\n\n3. **Voltage drop mapping:** Measure voltage (IR-drop) at test contacts and on-die during functional test at 0.75V to check whether spatial regions experience worse delivery.\n\n4. **Check if condition is ongoing:** Examine test data from more recent lots (post-L48) to confirm whether the process center has been corrected or whether L47/L48 were isolated excursions.\n\nThe pattern suggests a process control or electrical delivery issue that manifested in two consecutive lots and is most visible under the harshest test conditions (low voltage + high temperature + marginal spatial locations).",
+  "transcript": [
+    {
+      "role": "user",
+      "content": "A lot group has been flagged for review.\n\nDatalog: C:\\Users\\mayan\\OneDrive\\Documents\\GitHub\\ate-agent-triage\\data\\defect_4d.csv\n\nInvestigate and report your conclusion."
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "I'll investigate the yield excursion in the flagged lot group. Let me start by gathering data on the overall yield, failure patterns, and then narrow down the root cause."
+        },
+        {
+          "type": "tool_use",
+          "name": "get_overall_yield",
+          "input": {}
+        },
+        {
+          "type": "tool_use",
+          "name": "get_failures_by_test",
+          "input": {}
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "LOT_ID"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "SITE_NUM"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "WAFER_ID"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01UcDT5dDTgeoF6yU1pJvTNb",
+          "content": "{\"rows\": 112500, \"parts\": 3750, \"parts_failed\": 315, \"part_yield_pct\": 91.6, \"measurement_fail_rate_pct\": 0.361}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01RXechiWBErfZUV5vsRy9ry",
+          "content": "{\"rows\": 112500, \"tests\": [{\"test\": \"core_fmax\", \"runs\": 11250, \"fails\": 86, \"fail_rate_pct\": 0.764}, {\"test\": \"pll_lock\", \"runs\": 11250, \"fails\": 80, \"fail_rate_pct\": 0.711}, {\"test\": \"vmin_core\", \"runs\": 11250, \"fails\": 77, \"fail_rate_pct\": 0.684}, {\"test\": \"sram_bist\", \"runs\": 11250, \"fails\": 70, \"fail_rate_pct\": 0.622}, {\"test\": \"vmin_sram\", \"runs\": 11250, \"fails\": 20, \"fail_rate_pct\": 0.178}, {\"test\": \"idd_static\", \"runs\": 11250, \"fails\": 16, \"fail_rate_pct\": 0.142}, {\"test\": \"thermal_diode\", \"runs\": 11250, \"fails\": 16, \"fail_rate_pct\": 0.142}, {\"test\": \"idd_dynamic\", \"runs\": 11250, \"fails\": 15, \"fail_rate_pct\": 0.133}, {\"test\": \"scan_stuck_at\", \"runs\": 11250, \"fails\": 15, \"fail_rate_pct\": 0.133}, {\"test\": \"io_leakage\", \"runs\": 11250, \"fails\": 11, \"fail_rate_pct\": 0.098}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_019kN9jnCCT7cP3sJPmy2158",
+          "content": "{\"rows\": 112500, \"group_by\": \"LOT_ID\", \"groups\": [{\"LOT_ID\": \"L47\", \"parts\": 750, \"part_yield_pct\": 85.33, \"fail_rate_pct\": 0.689}, {\"LOT_ID\": \"L48\", \"parts\": 750, \"part_yield_pct\": 86.13, \"fail_rate_pct\": 0.662}, {\"LOT_ID\": \"L45\", \"parts\": 750, \"part_yield_pct\": 95.07, \"fail_rate_pct\": 0.164}, {\"LOT_ID\": \"L44\", \"parts\": 750, \"part_yield_pct\": 95.73, \"fail_rate_pct\": 0.142}, {\"LOT_ID\": \"L46\", \"parts\": 750, \"part_yield_pct\": 95.73, \"fail_rate_pct\": 0.147}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01HqdNUgwcuieUHxx3w7dmoR",
+          "content": "{\"rows\": 112500, \"group_by\": \"SITE_NUM\", \"groups\": [{\"SITE_NUM\": 3, \"parts\": 475, \"part_yield_pct\": 90.32, \"fail_rate_pct\": 0.379}, {\"SITE_NUM\": 4, \"parts\": 475, \"part_yield_pct\": 90.32, \"fail_rate_pct\": 0.414}, {\"SITE_NUM\": 5, \"parts\": 475, \"part_yield_pct\": 90.53, \"fail_rate_pct\": 0.456}, {\"SITE_NUM\": 1, \"parts\": 475, \"part_yield_pct\": 91.37, \"fail_rate_pct\": 0.4}, {\"SITE_NUM\": 7, \"parts\": 450, \"part_yield_pct\": 91.56, \"fail_rate_pct\": 0.363}, {\"SITE_NUM\": 6, \"parts\": 475, \"part_yield_pct\": 92.0, \"fail_rate_pct\": 0.33}, {\"SITE_NUM\": 8, \"parts\": 450, \"part_yield_pct\": 93.33, \"fail_rate_pct\": 0.267}, {\"SITE_NUM\": 2, \"parts\": 475, \"part_yield_pct\": 93.47, \"fail_rate_pct\": 0.274}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01MM6Vqwu6FgQg1uSu2nHzqN",
+          "content": "{\"rows\": 112500, \"group_by\": \"WAFER_ID\", \"groups\": [{\"WAFER_ID\": \"W01\", \"parts\": 750, \"part_yield_pct\": 90.13, \"fail_rate_pct\": 0.431}, {\"WAFER_ID\": \"W03\", \"parts\": 750, \"part_yield_pct\": 91.07, \"fail_rate_pct\": 0.364}, {\"WAFER_ID\": \"W04\", \"parts\": 750, \"part_yield_pct\": 92.0, \"fail_rate_pct\": 0.351}, {\"WAFER_ID\": \"W05\", \"parts\": 750, \"part_yield_pct\": 92.0, \"fail_rate_pct\": 0.342}, {\"WAFER_ID\": \"W02\", \"parts\": 750, \"part_yield_pct\": 92.8, \"fail_rate_pct\": 0.316}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Good start. I can see:\n- **Overall yield is 91.6%** (315 parts failed out of 3750)\n- **LOT_ID L47 and L48 are the worst performers** (85.33% and 86.13% yield), significantly below the others\n- The top failing tests are: core_fmax (0.764%), pll_lock (0.711%), vmin_core (0.684%), and sram_bist (0.622%)\n\nLet me investigate the failing tests more deeply by checking their distributions and whether they're temperature or voltage dependent:"
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "test_txt": "core_fmax"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "test_txt": "pll_lock"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "test_txt": "vmin_core"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "test_txt": "sram_bist"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01251WXM2rgKWT7E33fZTsMu",
+          "content": "{\"rows\": 11250, \"test\": \"core_fmax\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.08}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.213}, {\"TEMP_C\": 85, \"fail_rate_pct\": 2.0}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 2.05}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.132}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.108}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01ARG8EKyYLRtD6BbeeWArvn",
+          "content": "{\"rows\": 11250, \"test\": \"pll_lock\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.107}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.133}, {\"TEMP_C\": 85, \"fail_rate_pct\": 1.893}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 1.782}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.214}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.133}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01USQAMyaDcL78t2hsRTa5FD",
+          "content": "{\"rows\": 11250, \"test\": \"vmin_core\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.053}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.293}, {\"TEMP_C\": 85, \"fail_rate_pct\": 1.707}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 1.657}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.184}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.215}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_017pysdWyF6F3DkXYCMcu2qU",
+          "content": "{\"rows\": 11250, \"test\": \"sram_bist\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.053}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.24}, {\"TEMP_C\": 85, \"fail_rate_pct\": 1.573}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 1.586}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.106}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.186}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "**Strong pattern emerging:** All four top failing tests show the same correlation:\n- **At 85\u00b0C:** massive spike in failure rates (1.6\u20132.0%)\n- **At VDD=0.75V:** massive spike in failure rates (1.6\u20132.0%)\n- At lower temperatures (0\u00b0C, 25\u00b0C) and higher voltages (0.8V, 0.85V): much lower failure rates\n\nThis suggests a combined stress condition. Let me now check if this is also tied to specific lots:"
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "core_fmax",
+            "group_by": "LOT_ID"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "pll_lock",
+            "group_by": "LOT_ID"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "vmin_core",
+            "group_by": "LOT_ID"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "sram_bist",
+            "group_by": "LOT_ID"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01VnLj9Y56jKyxhpx5YGENfo",
+          "content": "{\"rows\": 11250, \"test\": \"core_fmax\", \"units\": \"GHz\", \"group_by\": \"LOT_ID\", \"groups\": [{\"LOT_ID\": \"L48\", \"n\": 2250, \"mean\": 3.8456, \"std\": 0.0937, \"p05\": 3.69, \"p50\": 3.8511, \"p95\": 3.9838, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.51, \"nearest_limit\": \"LO\"}, {\"LOT_ID\": \"L47\", \"n\": 2250, \"mean\": 3.8441, \"std\": 0.0892, \"p05\": 3.7042, \"p50\": 3.848, \"p95\": 3.9805, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.62, \"nearest_limit\": \"LO\"}, {\"LOT_ID\": \"L46\", \"n\": 2250, \"mean\": 3.8476, \"std\": 0.0809, \"p05\": 3.7159, \"p50\": 3.8449, \"p95\": 3.9821, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.94, \"nearest_limit\": \"LO\"}, {\"LOT_ID\": \"L45\", \"n\": 2250, \"mean\": 3.847, \"std\": 0.0794, \"p05\": 3.7144, \"p50\": 3.8464, \"p95\": 3.976, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.99, \"nearest_limit\": \"LO\"}, {\"LOT_ID\": \"L44\", \"n\": 2250, \"mean\": 3.8495, \"std\": 0.0785, \"p05\": 3.7179, \"p50\": 3.85, \"p95\": 3.9737, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 3.05, \"nearest_limit\": \"LO\"}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01KokiZSGjoPHJcWxXnSLsxJ",
+          "content": "{\"rows\": 11250, \"test\": \"pll_lock\", \"units\": \"us\", \"group_by\": \"LOT_ID\", \"groups\": [{\"LOT_ID\": \"L47\", \"n\": 2250, \"mean\": 45.3373, \"std\": 4.4918, \"p05\": 38.466, \"p50\": 45.0307, \"p95\": 52.667, \"lo_limit\": 21.0, \"hi_limit\": 57.0, \"margin_sigma\": 2.6, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L48\", \"n\": 2250, \"mean\": 45.1685, \"std\": 4.4248, \"p05\": 38.3409, \"p50\": 45.0266, \"p95\": 52.1665, \"lo_limit\": 21.0, \"hi_limit\": 57.0, \"margin_sigma\": 2.67, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L46\", \"n\": 2250, \"mean\": 45.1183, \"std\": 4.08, \"p05\": 38.5516, \"p50\": 45.0742, \"p95\": 51.9581, \"lo_limit\": 21.0, \"hi_limit\": 57.0, \"margin_sigma\": 2.91, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L45\", \"n\": 2250, \"mean\": 44.8562, \"std\": 4.075, \"p05\": 38.2489, \"p50\": 44.8662, \"p95\": 51.6672, \"lo_limit\": 21.0, \"hi_limit\": 57.0, \"margin_sigma\": 2.98, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L44\", \"n\": 2250, \"mean\": 45.0291, \"std\": 3.9676, \"p05\": 38.6693, \"p50\": 44.9596, \"p95\": 51.5197, \"lo_limit\": 21.0, \"hi_limit\": 57.0, \"margin_sigma\": 3.02, \"nearest_limit\": \"HI\"}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01BbijNvtsnS8w1JrqFbcPLF",
+          "content": "{\"rows\": 11250, \"test\": \"vmin_core\", \"units\": \"V\", \"group_by\": \"LOT_ID\", \"groups\": [{\"LOT_ID\": \"L47\", \"n\": 2250, \"mean\": 0.7211, \"std\": 0.0165, \"p05\": 0.695, \"p50\": 0.7207, \"p95\": 0.7473, \"lo_limit\": 0.63, \"hi_limit\": 0.765, \"margin_sigma\": 2.67, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L48\", \"n\": 2250, \"mean\": 0.7209, \"std\": 0.0165, \"p05\": 0.695, \"p50\": 0.72, \"p95\": 0.7479, \"lo_limit\": 0.63, \"hi_limit\": 0.765, \"margin_sigma\": 2.68, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L44\", \"n\": 2250, \"mean\": 0.7204, \"std\": 0.0152, \"p05\": 0.6959, \"p50\": 0.7198, \"p95\": 0.7457, \"lo_limit\": 0.63, \"hi_limit\": 0.765, \"margin_sigma\": 2.95, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L45\", \"n\": 2250, \"mean\": 0.7203, \"std\": 0.0149, \"p05\": 0.696, \"p50\": 0.7205, \"p95\": 0.7447, \"lo_limit\": 0.63, \"hi_limit\": 0.765, \"margin_sigma\": 2.99, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L46\", \"n\": 2250, \"mean\": 0.7201, \"std\": 0.0148, \"p05\": 0.6951, \"p50\": 0.7205, \"p95\": 0.7443, \"lo_limit\": 0.63, \"hi_limit\": 0.765, \"margin_sigma\": 3.02, \"nearest_limit\": \"HI\"}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_016AdZbCSkjzYZG4DbUgqhAH",
+          "content": "{\"rows\": 11250, \"test\": \"sram_bist\", \"units\": \"repairs\", \"group_by\": \"LOT_ID\", \"groups\": [{\"LOT_ID\": \"L48\", \"n\": 2250, \"mean\": 8.1084, \"std\": 1.314, \"p05\": 6.059, \"p50\": 8.0793, \"p95\": 10.2703, \"lo_limit\": 0.8, \"hi_limit\": 11.6, \"margin_sigma\": 2.66, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L47\", \"n\": 2250, \"mean\": 8.082, \"std\": 1.3155, \"p05\": 6.0416, \"p50\": 8.0396, \"p95\": 10.1533, \"lo_limit\": 0.8, \"hi_limit\": 11.6, \"margin_sigma\": 2.67, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L46\", \"n\": 2250, \"mean\": 7.995, \"std\": 1.2094, \"p05\": 6.0407, \"p50\": 7.9846, \"p95\": 10.0051, \"lo_limit\": 0.8, \"hi_limit\": 11.6, \"margin_sigma\": 2.98, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L45\", \"n\": 2250, \"mean\": 7.9488, \"std\": 1.1958, \"p05\": 5.9662, \"p50\": 7.9435, \"p95\": 9.9403, \"lo_limit\": 0.8, \"hi_limit\": 11.6, \"margin_sigma\": 3.05, \"nearest_limit\": \"HI\"}, {\"LOT_ID\": \"L44\", \"n\": 2250, \"mean\": 8.0014, \"std\": 1.1724, \"p05\": 6.0565, \"p50\": 7.9954, \"p95\": 9.9176, \"lo_limit\": 0.8, \"hi_limit\": 11.6, \"margin_sigma\": 3.07, \"nearest_limit\": \"HI\"}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "**Critical finding:** Lots L47 and L48 show consistently **lower margin_sigma values** (tighter margins to limits) across all four failing tests:\n\n- **core_fmax:** L47=2.62\u03c3, L48=2.51\u03c3 vs. L44=3.05\u03c3, L45=2.99\u03c3 (best lots)\n- **pll_lock:** L47=2.6\u03c3, L48=2.67\u03c3 vs. L44=3.02\u03c3, L45=2.98\u03c3\n- **vmin_core:** L47=2.67\u03c3, L48=2.68\u03c3 vs. L44=2.95\u03c3, L45=2.99\u03c3\n- **sram_bist:** L47=2.67\u03c3, L48=2.66\u03c3 vs. L44=3.07\u03c3, L45=3.05\u03c3\n\nNow let me verify if the problem is specifically when L47/L48 are tested at high temperature AND low voltage:"
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "core_fmax",
+            "group_by": "TEMP_C"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "core_fmax",
+            "group_by": "VDD"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {
+            "test_txt": "core_fmax"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01M9CMmW9yeuULzBsmVS5pjJ",
+          "content": "{\"rows\": 11250, \"test\": \"core_fmax\", \"units\": \"GHz\", \"group_by\": \"TEMP_C\", \"groups\": [{\"TEMP_C\": \"85\", \"n\": 3750, \"mean\": 3.8419, \"std\": 0.0925, \"p05\": 3.6937, \"p50\": 3.8471, \"p95\": 3.981, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.51, \"nearest_limit\": \"LO\"}, {\"TEMP_C\": \"25\", \"n\": 3750, \"mean\": 3.8503, \"std\": 0.0813, \"p05\": 3.7163, \"p50\": 3.8503, \"p95\": 3.9805, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.96, \"nearest_limit\": \"LO\"}, {\"TEMP_C\": \"0\", \"n\": 3750, \"mean\": 3.8481, \"std\": 0.0791, \"p05\": 3.7177, \"p50\": 3.8473, \"p95\": 3.98, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 3.01, \"nearest_limit\": \"LO\"}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_013tex8Xdrahnjt2Dy6fvQoi",
+          "content": "{\"rows\": 11250, \"test\": \"core_fmax\", \"units\": \"GHz\", \"group_by\": \"VDD\", \"groups\": [{\"VDD\": \"0.75\", \"n\": 3756, \"mean\": 3.8422, \"std\": 0.0924, \"p05\": 3.6989, \"p50\": 3.8465, \"p95\": 3.9813, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.51, \"nearest_limit\": \"LO\"}, {\"VDD\": \"0.85\", \"n\": 3694, \"mean\": 3.8499, \"std\": 0.0807, \"p05\": 3.7135, \"p50\": 3.8493, \"p95\": 3.9809, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.97, \"nearest_limit\": \"LO\"}, {\"VDD\": \"0.8\", \"n\": 3800, \"mean\": 3.8482, \"std\": 0.0799, \"p05\": 3.7152, \"p50\": 3.8491, \"p95\": 3.979, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.98, \"nearest_limit\": \"LO\"}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01Lm1cHgBXjAdrjLcaVLuZqK",
+          "content": "{\"rows\": 11250, \"test\": \"core_fmax\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.25}, {\"region\": \"mid\", \"fail_rate_pct\": 0.037}, {\"region\": \"outer\", \"fail_rate_pct\": 0.963}, {\"region\": \"edge\", \"fail_rate_pct\": 1.204}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.167}, {\"octant\": \"N\", \"fail_rate_pct\": 2.083}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.127}, {\"octant\": \"NW\", \"fail_rate_pct\": 2.286}, {\"octant\": \"S\", \"fail_rate_pct\": 0.078}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.182}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.19}, {\"octant\": \"W\", \"fail_rate_pct\": 1.167}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "**New significant finding:** There is also a **SPATIAL component** for core_fmax:\n- **Edge region:** 1.204% failure rate\n- **Outer region:** 0.963% failure rate\n- **NW octant:** 2.286% failure rate\n- **N octant:** 2.083% failure rate\n- vs. center/S/SE/SW: 0.078\u20130.25%\n\nThis suggests a die-position effect. Let me check if the spatial problem is concentrated in L47/L48:"
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {
+            "test_txt": "pll_lock"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {
+            "test_txt": "vmin_core"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_by_region",
+          "input": {
+            "test_txt": "sram_bist"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01MMpSbLVbwYDfpLJ1GvaS6v",
+          "content": "{\"rows\": 11250, \"test\": \"pll_lock\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.167}, {\"region\": \"mid\", \"fail_rate_pct\": 0.111}, {\"region\": \"outer\", \"fail_rate_pct\": 0.778}, {\"region\": \"edge\", \"fail_rate_pct\": 1.161}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.167}, {\"octant\": \"N\", \"fail_rate_pct\": 1.75}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.063}, {\"octant\": \"NW\", \"fail_rate_pct\": 2.349}, {\"octant\": \"S\", \"fail_rate_pct\": 0.392}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.061}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.127}, {\"octant\": \"W\", \"fail_rate_pct\": 0.917}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_015KGC13934oLAqjowcXiBDx",
+          "content": "{\"rows\": 11250, \"test\": \"vmin_core\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.25}, {\"region\": \"mid\", \"fail_rate_pct\": 0.148}, {\"region\": \"outer\", \"fail_rate_pct\": 0.667}, {\"region\": \"edge\", \"fail_rate_pct\": 1.118}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.167}, {\"octant\": \"N\", \"fail_rate_pct\": 2.167}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.063}, {\"octant\": \"NW\", \"fail_rate_pct\": 1.968}, {\"octant\": \"S\", \"fail_rate_pct\": 0.235}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.182}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.254}, {\"octant\": \"W\", \"fail_rate_pct\": 0.583}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_013CjdVsCHZVSRcrzdMrPxy2",
+          "content": "{\"rows\": 11250, \"test\": \"sram_bist\", \"band_edges_normalised_radius\": [0.0, 0.35, 0.55, 0.75, 1.01], \"by_radial_band\": [{\"region\": \"centre\", \"fail_rate_pct\": 0.167}, {\"region\": \"mid\", \"fail_rate_pct\": 0.185}, {\"region\": \"outer\", \"fail_rate_pct\": 0.815}, {\"region\": \"edge\", \"fail_rate_pct\": 0.882}], \"by_octant\": [{\"octant\": \"E\", \"fail_rate_pct\": 0.0}, {\"octant\": \"N\", \"fail_rate_pct\": 2.0}, {\"octant\": \"NE\", \"fail_rate_pct\": 0.19}, {\"octant\": \"NW\", \"fail_rate_pct\": 1.714}, {\"octant\": \"S\", \"fail_rate_pct\": 0.078}, {\"octant\": \"SE\", \"fail_rate_pct\": 0.182}, {\"octant\": \"SW\", \"fail_rate_pct\": 0.19}, {\"octant\": \"W\", \"fail_rate_pct\": 0.75}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "**Consistent spatial pattern confirmed** across all four failing tests:\n- All show elevated failure rates in the **edge/outer regions** and particularly in **N and NW octants** (1.7\u20132.3%)\n- The N/NW area is consistently 10\u201315x worse than center/S/SE/SW areas\n\nNow let me check if L47 and L48 are over-represented in edge/N/NW positions by cross-checking wafer distribution:"
+        },
+        {
+          "type": "tool_use",
+          "name": "get_yield_summary",
+          "input": {
+            "group_by": "WAFER_ID"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01HjCqN1kR3mYdqp6D34sCjC",
+          "content": "{\"rows\": 112500, \"group_by\": \"WAFER_ID\", \"groups\": [{\"WAFER_ID\": \"W01\", \"parts\": 750, \"part_yield_pct\": 90.13, \"fail_rate_pct\": 0.431}, {\"WAFER_ID\": \"W03\", \"parts\": 750, \"part_yield_pct\": 91.07, \"fail_rate_pct\": 0.364}, {\"WAFER_ID\": \"W04\", \"parts\": 750, \"part_yield_pct\": 92.0, \"fail_rate_pct\": 0.351}, {\"WAFER_ID\": \"W05\", \"parts\": 750, \"part_yield_pct\": 92.0, \"fail_rate_pct\": 0.342}, {\"WAFER_ID\": \"W02\", \"parts\": 750, \"part_yield_pct\": 92.8, \"fail_rate_pct\": 0.316}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Wafer W01 has the worst yield (90.13%) with 0.431% fail rate. Let me now determine which lots appear on which wafers by examining the LOT_ID distribution more carefully by checking if there's a LOT+TEMP or LOT+VDD interaction:"
+        },
+        {
+          "type": "tool_use",
+          "name": "get_fail_rate_by_condition",
+          "input": {
+            "test_txt": "core_fmax"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_019iBK9Cwu3WxgM9aRy6WoiW",
+          "content": "{\"rows\": 11250, \"test\": \"core_fmax\", \"by_temperature\": [{\"TEMP_C\": 0, \"fail_rate_pct\": 0.08}, {\"TEMP_C\": 25, \"fail_rate_pct\": 0.213}, {\"TEMP_C\": 85, \"fail_rate_pct\": 2.0}], \"by_voltage\": [{\"VDD\": 0.75, \"fail_rate_pct\": 2.05}, {\"VDD\": 0.8, \"fail_rate_pct\": 0.132}, {\"VDD\": 0.85, \"fail_rate_pct\": 0.108}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Let me verify the interaction by checking distributions at specific conditions for each lot:"
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "core_fmax",
+            "group_by": "TEMP_C"
+          }
+        },
+        {
+          "type": "tool_use",
+          "name": "get_distribution_stats",
+          "input": {
+            "test_txt": "core_fmax",
+            "group_by": "VDD"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01XLdWbeQLXQanfedbMn6VrE",
+          "content": "{\"rows\": 11250, \"test\": \"core_fmax\", \"units\": \"GHz\", \"group_by\": \"TEMP_C\", \"groups\": [{\"TEMP_C\": \"85\", \"n\": 3750, \"mean\": 3.8419, \"std\": 0.0925, \"p05\": 3.6937, \"p50\": 3.8471, \"p95\": 3.981, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.51, \"nearest_limit\": \"LO\"}, {\"TEMP_C\": \"25\", \"n\": 3750, \"mean\": 3.8503, \"std\": 0.0813, \"p05\": 3.7163, \"p50\": 3.8503, \"p95\": 3.9805, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.96, \"nearest_limit\": \"LO\"}, {\"TEMP_C\": \"0\", \"n\": 3750, \"mean\": 3.8481, \"std\": 0.0791, \"p05\": 3.7177, \"p50\": 3.8473, \"p95\": 3.98, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 3.01, \"nearest_limit\": \"LO\"}]}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01MbU9eQzcG9opP5gwb3jFxF",
+          "content": "{\"rows\": 11250, \"test\": \"core_fmax\", \"units\": \"GHz\", \"group_by\": \"VDD\", \"groups\": [{\"VDD\": \"0.75\", \"n\": 3756, \"mean\": 3.8422, \"std\": 0.0924, \"p05\": 3.6989, \"p50\": 3.8465, \"p95\": 3.9813, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.51, \"nearest_limit\": \"LO\"}, {\"VDD\": \"0.85\", \"n\": 3694, \"mean\": 3.8499, \"std\": 0.0807, \"p05\": 3.7135, \"p50\": 3.8493, \"p95\": 3.9809, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.97, \"nearest_limit\": \"LO\"}, {\"VDD\": \"0.8\", \"n\": 3800, \"mean\": 3.8482, \"std\": 0.0799, \"p05\": 3.7152, \"p50\": 3.8491, \"p95\": 3.979, \"lo_limit\": 3.61, \"hi_limit\": 4.33, \"margin_sigma\": 2.98, \"nearest_limit\": \"LO\"}]}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Based on my investigation, I have identified the root causes of the yield excursion. Let me summarize my findings:\n\n---\n\nROOT_CAUSE_DIMENSIONS: LOT_ID, TEMP_C, VDD, SPATIAL\n\nROOT_CAUSE_VALUES: LOT_ID=L47,L48; TEMP_C=85; VDD=0.75; SPATIAL=edge,N,NW\n\nROOT_CAUSE_STRUCTURE: interaction\n\nROOT_CAUSE_EVIDENCE: inferred\n\n---\n\nFINDINGS\n\n1. **Overall yield degradation:** 91.6% part yield with 315 failed parts out of 3,750 total (from get_overall_yield).\n\n2. **Lots L47 and L48 are significantly underperforming:** L47 yields 85.33% and L48 yields 86.13%, vs. L44 (95.73%), L45 (95.07%), and L46 (95.73%) \u2014 a gap of 10 percentage points (from get_yield_summary by LOT_ID).\n\n3. **Four tests dominate failures:** core_fmax (0.764%), pll_lock (0.711%), vmin_core (0.684%), and sram_bist (0.622%) account for ~2.8% of test runs failing (from get_failures_by_test).\n\n4. **All four failing tests show tight margins in L47 and L48:** Margin to nearest limit is 2.51\u20132.68\u03c3 for L47/L48 vs. 2.95\u20133.07\u03c3 for better lots across all four tests (from get_distribution_stats by LOT_ID), indicating these lots are biased closer to failure limits.\n\n5. **All four tests fail catastrophically at 85\u00b0C:** core_fmax 2.0%, pll_lock 1.893%, vmin_core 1.707%, sram_bist 1.573% vs. ~0.08\u20130.3% at 0\u00b0C or 25\u00b0C (from get_fail_rate_by_condition by temperature). At 85\u00b0C, margin drops to 2.51\u03c3 vs. 2.96\u20133.01\u03c3 at lower temps (from get_distribution_stats by TEMP_C).\n\n6. **All four tests fail catastrophically at VDD=0.75V:** core_fmax 2.05%, pll_lock 1.782%, vmin_core 1.657%, sram_bist 1.586% vs. 0.1\u20130.2% at 0.8V or 0.85V (from get_fail_rate_by_condition by voltage). At 0.75V, margin drops to 2.51\u03c3 vs. 2.97\u20132.98\u03c3 at higher voltages (from get_distribution_stats by VDD).\n\n7. **Spatial clustering on N, NW edge positions:** For core_fmax, NW octant has 2.286% failure rate and N octant 2.083%, vs. 0.078\u20130.19% in S/SE/SW octants. Edge region 1.204% vs. centre 0.25%. This pattern repeats for pll_lock (NW 2.349%, N 1.75% vs. centre 0.167%) and sram_bist (N 2.0%, NW 1.714% vs. centre 0.167%) (from get_yield_by_region).\n\nRULED OUT\n\n- **Site-level manufacturing defect:** Failure rates across 8 test sites are relatively uniform (90.32\u201393.47%), with site 2 and 8 only 3.1 percentage points better than site 3\u20135. Not a strong site signature (from get_yield_summary by SITE_NUM).\n\n- **Wafer-level effect alone:** W01 is worst at 90.13% yield but only 2.7 points worse than W02 (92.8%). Without lot-to-wafer mapping, spatial patterns alone don't isolate the problem to a single physical substrate (from get_yield_summary by WAFER_ID).\n\nASSESSMENT\n\nThe evidence reveals a **multi-factor yield excursion involving lots L47 and L48 that is triggered by a combination of stress conditions:**\n\n- L47 and L48 are biased **closer to lower specification limits** across all four dominant failing tests (2.5\u20132.7\u03c3 margin vs. 3.0\u03c3 nominal), likely due to process center shift during those manufacturing lots.\n- When stressed at **high temperature (85\u00b0C) and low supply voltage (0.75V) simultaneously**, these already-marginal parts fail at dramatically elevated rates (1.6\u20132.0% failure rate per test).\n- **Spatial effects** (N, NW octants and wafer edge) are also evident, suggesting possible **non-uniform die-to-die performance or thermal gradient across the wafer**, which compounds the margin problem.\n\nI observed these dimensions separately in the data (LOT+TEMP in separate breakdowns, LOT+VDD in separate breakdowns, SPATIAL independent of LOT breakdown, and VDD/TEMP also independent of SPATIAL). I did not retrieve a single result showing failure rates for the specific combination of (L47 OR L48) AND (85\u00b0C) AND (0.75V) AND (edge/N/NW) together. Therefore, the interaction is **inferred** from observing each factor independently contributing to the marginal condition.\n\nThe spatial clustering may indicate that specific die positions on L47/L48 wafers see higher local temperature, lower local voltage delivery, or intrinsic process variability.\n\nRECOMMENDED NEXT STEP\n\n1. **Cross-lot process fingerprint:** Obtain metrology (e.g., Vt, oxide thickness, dopant profile) on representative dies from L47, L48, and a good lot (L44 or L45) to determine if a systematic process excursion (dopant implant variation, anneal temperature, or etch uniformity) explains the lower parameter margins.\n\n2. **Thermal imaging or thermal simulation:** Perform thermal analysis of test setup or wafer mounting at the combination of 85\u00b0C and 0.75V to confirm whether the N/NW edge region experiences local temperature rise or voltage droop.\n\n3. **Voltage drop mapping:** Measure voltage (IR-drop) at test contacts and on-die during functional test at 0.75V to check whether spatial regions experience worse delivery.\n\n4. **Check if condition is ongoing:** Examine test data from more recent lots (post-L48) to confirm whether the process center has been corrected or whether L47/L48 were isolated excursions.\n\nThe pattern suggests a process control or electrical delivery issue that manifested in two consecutive lots and is most visible under the harshest test conditions (low voltage + high temperature + marginal spatial locations)."
+        }
+      ]
+    }
+  ]
+}

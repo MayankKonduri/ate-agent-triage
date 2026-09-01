@@ -1,0 +1,67 @@
+==================================================================
+ AUTOMATED EXCURSION GATE -- LOT DISPOSITION REPORT
+==================================================================
+ datalog file      : data/clean.csv
+ generated         : 2026-08-30 21:23:45 UTC
+
+ YIELD LIMIT DERIVATION
+   historical mean   94.00 %
+   historical sigma  0.50 %
+   limit (mean-3sig) 92.50 %
+
+------------------------------------------------------------------
+ 1. LOT SUMMARY
+------------------------------------------------------------------
+   measurements      112500
+   failed rows       162  (0.14%)
+   parts tested      3750
+   parts failed      158
+   lots              5
+   wafers            25
+   distinct tests    10
+   overall yield     95.79 %
+   vs baseline       +1.79 pts  (+3.6 sigma)
+
+------------------------------------------------------------------
+ 2. PER-LOT DISPOSITION
+------------------------------------------------------------------
+   LOT        PARTS     YIELD     SIGMA   STATUS
+   L44          750    95.73%     +3.5   ok
+   L45          750    95.07%     +2.1   ok
+   L46          750    95.73%     +3.5   ok
+   L47          750    95.73%     +3.5   ok
+   L48          750    96.67%     +5.3   ok
+
+   lots held: 0
+
+------------------------------------------------------------------
+ 3. FAILURE PARETO BY TEST
+------------------------------------------------------------------
+   TEST                FAILS     RUNS      RATE  UNITS
+   vmin_sram              20    11250     0.18%  V
+   vmin_core              20    11250     0.18%  V
+   pll_lock               18    11250     0.16%  us
+   thermal_diode          16    11250     0.14%  degC
+   sram_bist              16    11250     0.14%  repairs
+   idd_static             16    11250     0.14%  A
+   scan_stuck_at          15    11250     0.13%  pct
+   idd_dynamic            15    11250     0.13%  A
+   core_fmax              15    11250     0.13%  GHz
+   io_leakage             11    11250     0.10%  uA
+
+------------------------------------------------------------------
+ 4. HARD BIN SUMMARY
+------------------------------------------------------------------
+   bin 1 = pass   bin 2 = parametric fail   bin 3 = functional fail
+   bin 1        112338
+   bin 2            86
+   bin 3            76
+
+------------------------------------------------------------------
+ 5. VERDICT
+------------------------------------------------------------------
+   STATUS   : RELEASE
+   ACTION   : no hold, continue to assembly
+   BASIS    : overall part-level yield 95.79% is at or above the
+              statistical yield limit of 92.50%
+==================================================================

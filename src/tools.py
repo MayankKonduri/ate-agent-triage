@@ -27,21 +27,21 @@ import analyze
 _FILTERS = {
     "type": "object",
     "description": (
-        "Optional. Restrict which rows are considered BEFORE the "
-        "aggregation is computed. Each key is a column and each value is "
-        "a single value or a list of values. Use this to carry a finding "
-        "from one query into the next, e.g. after finding a suspect lot, "
-        "pass {\"LOT_ID\": [\"L47\"]} to look only within it."
+        "Optional. Restrict which rows are included before the "
+        "aggregation is computed. Each key is a column name and each "
+        "value is a single value or a list of values. Rows not matching "
+        "every key are excluded."
     ),
     "properties": {
-        "LOT_ID":    {"description": "e.g. \"L47\" or [\"L47\", \"L48\"]"},
-        "WAFER_ID":  {"description": "e.g. \"W03\""},
+        "LOT_ID":    {"description": "lot identifier, or a list of them"},
+        "WAFER_ID":  {"description": "wafer identifier, e.g. W03"},
         "SITE_NUM":  {"description": "test site, 1-8"},
         "TEST_TXT":  {"description": "test name"},
         "TEMP_C":    {"description": "insertion temperature: 0, 25 or 85"},
         "VDD":       {"description": "supply voltage: 0.75, 0.80 or 0.85"},
         "INSERTION": {"description": "sort_cold, sort_room or sort_hot"},
         "REGION":    {"description": "radial band: centre, mid, outer or edge"},
+        "OCTANT":    {"description": "wafer octant: N, NE, E, SE, S, SW, W, NW"},
     },
 }
 
@@ -91,20 +91,17 @@ SCHEMAS = {
 
     "get_fail_rate_by_condition": _schema(
         "get_fail_rate_by_condition",
-        "Failure rate split by test temperature and supply voltage. "
-        "Returns each marginal plus the full TEMP_C x VDD grid, which "
-        "distinguishes an interaction between the two from two "
-        "independent effects.",
+        "Failure rate split by test temperature and by supply voltage, "
+        "reported as two separate breakdowns.",
         {"test_txt": {"type": "string",
                       "description": "test name; omit to pool all tests"}},
     ),
 
     "get_yield_by_region": _schema(
         "get_yield_by_region",
-        "Failure rate by die position on the wafer. Returns radial bands "
-        "(centre/mid/outer/edge), 45-degree octants (N, NE, E, ...), and "
-        "the band x octant grid. A defect confined to one sector is "
-        "diluted in either marginal alone and resolves only in the grid.",
+        "Failure rate by die position on the wafer, reported as two "
+        "separate breakdowns: radial bands (centre/mid/outer/edge) and "
+        "45-degree octants (N, NE, E, ...).",
         {"test_txt": {"type": "string",
                       "description": "test name; omit to pool all tests"}},
     ),
@@ -120,7 +117,7 @@ SCHEMAS = {
         {"test_txt": {"type": "string", "description": "test name"},
          "group_by": {"type": "string",
                       "enum": ["LOT_ID", "WAFER_ID", "SITE_NUM",
-                               "TEMP_C", "VDD", "REGION"],
+                               "TEMP_C", "VDD", "REGION", "OCTANT"],
                       "description": "optional field to group by"}},
         ["test_txt"],
     ),

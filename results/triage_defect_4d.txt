@@ -1,0 +1,71 @@
+==================================================================
+ AUTOMATED EXCURSION GATE -- LOT DISPOSITION REPORT
+==================================================================
+ datalog file      : data/defect_4d.csv
+ generated         : 2026-08-30 21:23:53 UTC
+
+ YIELD LIMIT DERIVATION
+   historical mean   94.00 %
+   historical sigma  0.50 %
+   limit (mean-3sig) 92.50 %
+
+------------------------------------------------------------------
+ 1. LOT SUMMARY
+------------------------------------------------------------------
+   measurements      112500
+   failed rows       406  (0.36%)
+   parts tested      3750
+   parts failed      315
+   lots              5
+   wafers            25
+   distinct tests    10
+   overall yield     91.60 %
+   vs baseline       -2.40 pts  (-4.8 sigma)
+
+------------------------------------------------------------------
+ 2. PER-LOT DISPOSITION
+------------------------------------------------------------------
+   LOT        PARTS     YIELD     SIGMA   STATUS
+   L44          750    95.73%     +3.5   ok
+   L45          750    95.07%     +2.1   ok
+   L46          750    95.73%     +3.5   ok
+   L47          750    85.33%    -17.3   HOLD
+   L48          750    86.13%    -15.7   HOLD
+
+   lots held: 2 -- L47 L48
+
+------------------------------------------------------------------
+ 3. FAILURE PARETO BY TEST
+------------------------------------------------------------------
+   TEST                FAILS     RUNS      RATE  UNITS
+   core_fmax              86    11250     0.76%  GHz
+   pll_lock               80    11250     0.71%  us
+   vmin_core              77    11250     0.68%  V
+   sram_bist              70    11250     0.62%  repairs
+   vmin_sram              20    11250     0.18%  V
+   thermal_diode          16    11250     0.14%  degC
+   idd_static             16    11250     0.14%  A
+   scan_stuck_at          15    11250     0.13%  pct
+   idd_dynamic            15    11250     0.13%  A
+   io_leakage             11    11250     0.10%  uA
+
+------------------------------------------------------------------
+ 4. HARD BIN SUMMARY
+------------------------------------------------------------------
+   bin 1 = pass   bin 2 = parametric fail   bin 3 = functional fail
+   bin 1        112094
+   bin 2           214
+   bin 3           192
+
+------------------------------------------------------------------
+ 5. VERDICT
+------------------------------------------------------------------
+   STATUS   : EXCURSION
+   ACTION   : hold lot group, route to product engineering
+   BASIS    : overall part-level yield 91.60% is below the
+              statistical yield limit of 92.50%
+   NOTE     : this gate identifies THAT an excursion occurred. It does
+              not identify a root cause. Sections 1-4 are provided as
+              starting context only; no dimension beyond lot and test
+              has been examined.
+==================================================================

@@ -1,8 +1,9 @@
-﻿ate-env/
+﻿@"
+ate-env/
 __pycache__/
 *.pyc
 .env
 data/
-runs/
-results/
 figures/
+runs/
+"@ | Out-File -Encoding utf8 .gitignore
