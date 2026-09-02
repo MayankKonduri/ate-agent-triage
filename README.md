@@ -387,4 +387,6 @@ dimensions with their correct values.
 The report is worth reading for the query appendix rather than the
 prose. Queries 12 through 14 show the agent narrowing to the affected
 population one condition at a time, then holding that population fixed
-while varying the stress conditions:
+while varying the stress conditions. Each finding traces back to a
+numbered query, so an engineer can verify any claim against the data
+that produced it.
