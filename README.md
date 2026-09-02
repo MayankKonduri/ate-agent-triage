@@ -348,9 +348,12 @@ Therefore, the agent can **localize a failure within the test data but cannot es
 
 ## Example Output
 
-[`results/full_defect_4d.pdf`](results/full_defect_4d.pdf) is a report
-produced by a single `full` run on the injected dataset. It is included
-as an illustration of what the pipeline delivers to a human reviewer.
+[![Example agent report](docs/report_page1.png)](results/full_defect_4d.pdf)
+
+*Click the page above for the full report.*
+[`results/full_defect_4d.pdf`](results/full_defect_4d.pdf) is a single
+`full` run on the injected dataset, included as an illustration of what
+the pipeline delivers to a human reviewer.
 
 The run made **25 queries across 12 iterations**, 18 of them filtered,
 and used all six available functions. It declared all four injected
