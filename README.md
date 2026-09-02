@@ -16,6 +16,31 @@ The central question investigated by this repository is:
 
 ---
 
+## Findings
+
+| Configuration | Dimensions (of 4) | Values (of 4) | Spurious on control |
+|---|---|---|---|
+| `minimal`   | 0.0 | 0.0 | 0.0 |
+| `minimal_f` | 3.0 | 2.6 | 2.6 |
+| `reduced`   | 3.8 | 2.8 | 2.4 |
+| `full`      | 4.0 | 3.8 | 2.8 |
+
+**Coverage bounds discovery.** `minimal` recovered nothing in any run,
+halting after two queries because no third question existed.
+`minimal_f` missed `LOT_ID` in all five runs — it can filter to a lot
+but cannot group by lot ($p = 0.008$).
+
+**Composition bounds precision.** `reduced` and `full` named nearly the
+same dimensions but differed on locating the values within them, and
+`reduced` described the condition as four independent effects in four
+of five runs ($p = 0.021$).
+
+**Capability increases false discovery.** On control data with no
+defect, 22 of 25 runs reported a cause anyway. The only configuration
+that stayed silent was the one unable to examine anything.
+
+---
+
 ## Overview
 
 A fabless semiconductor company receives test data from overseas assembly and test partners rather than physical silicon. When a production lot's yield falls below its statistical limit, an engineer must diagnose the cause from the datalog alone by choosing which dimension to group along next:
