@@ -1,10 +1,10 @@
 # Tool Schema Design and Root-Cause Discovery in Post-Silicon ATE Data
 
-Companion code for *Does Tool Schema Design Bound the Root-Cause Discovery Rate of a Tool-Calling LLM Agent on Post-Silicon ATE Data?*
+Companion code for [*Does Tool Schema Design Bound the Root-Cause Discovery Rate of a Tool-Calling LLM Agent on Post-Silicon ATE Data?*](docs/Mayank_Konduri_AI-Assisted_Root-Cause_Triage.pdf)
 
-**V. N. M. Konduri**
-Department of Electrical and Computer Engineering
-The University of Texas at Austin
+**Venkata Naga Mayank Konduri**
+
+Chandra Department of Electrical and Computer Engineering, The University of Texas at Austin
 
 ---
 
