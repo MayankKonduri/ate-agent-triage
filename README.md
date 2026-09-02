@@ -27,7 +27,7 @@ The central question investigated by this repository is:
 
 **Coverage bounds discovery.** `minimal` recovered nothing in any run,
 halting after two queries because no third question existed.
-`minimal_f` missed `LOT_ID` in all five runs — it can filter to a lot
+`minimal_f` missed `LOT_ID` in all five runs; it can filter to a lot
 but cannot group by lot ($p = 0.008$).
 
 **Composition bounds precision.** `reduced` and `full` named nearly the
